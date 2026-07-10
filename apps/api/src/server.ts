@@ -120,6 +120,14 @@ function publicMerchant(merchant: AnyRow) {
   }
 }
 
+function publicMerchantFollow(follow: AnyRow) {
+  return {
+    id: follow.follow_id,
+    followedAt: iso(follow.followed_at),
+    merchant: publicMerchant(follow)
+  }
+}
+
 function normalizeAddressLabel(value?: string | null): string {
   const trimmed = value?.trim()
   return trimmed || DEFAULT_ADDRESS_LABEL
@@ -198,6 +206,24 @@ function publicOrderReview(review: AnyRow) {
   }
 }
 
+function publicReviewFeedItem(review: AnyRow) {
+  return {
+    id: review.id,
+    orderId: review.order_id,
+    orderNo: review.order_no,
+    userDisplayName: review.display_name || '假装购用户',
+    rating: Number(review.rating),
+    content: review.content,
+    tags: json<string[]>(review.tags, []),
+    itemTitles: String(review.item_titles || '')
+      .split('、')
+      .map((item) => item.trim())
+      .filter(Boolean),
+    createdAt: iso(review.created_at),
+    updatedAt: iso(review.updated_at)
+  }
+}
+
 async function publicOrder(order: AnyRow) {
   const items = await rows(
     `SELECT id, product_id, title, image_url, unit_price, quantity, subtotal_amount
@@ -245,6 +271,79 @@ async function publicOrder(order: AnyRow) {
     events: events.map(publicStatusEvent),
     review: review ? publicOrderReview(review) : null
   }
+}
+
+async function reviewSummary(scope: { productId?: string; merchantId?: string }) {
+  const existsSql = scope.productId
+    ? `EXISTS (SELECT 1 FROM order_items oi WHERE oi.order_id = rv.order_id AND oi.product_id = ?)`
+    : `EXISTS (
+        SELECT 1 FROM order_items oi
+        JOIN products p ON p.id = oi.product_id
+        WHERE oi.order_id = rv.order_id AND p.merchant_id = ?
+      )`
+  const scopeId = scope.productId ?? scope.merchantId
+  const [summary, distribution, tagRows] = await Promise.all([
+    row(`SELECT COUNT(*) count, COALESCE(AVG(rv.rating), 0) average_rating FROM order_reviews rv WHERE ${existsSql}`, [scopeId]),
+    rows(`SELECT rv.rating, COUNT(*) count FROM order_reviews rv WHERE ${existsSql} GROUP BY rv.rating ORDER BY rv.rating DESC`, [scopeId]),
+    rows(`SELECT rv.tags FROM order_reviews rv WHERE ${existsSql} ORDER BY rv.updated_at DESC LIMIT 200`, [scopeId])
+  ])
+  const tagCounts = new Map<string, number>()
+  for (const item of tagRows) {
+    for (const tag of json<string[]>(item.tags, [])) {
+      tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1)
+    }
+  }
+  return {
+    count: Number(summary?.count ?? 0),
+    averageRating: Number(Number(summary?.average_rating ?? 0).toFixed(1)),
+    distribution: distribution.map((item) => ({ rating: Number(item.rating), count: Number(item.count) })),
+    topTags: [...tagCounts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 8)
+      .map(([tag, count]) => ({ tag, count }))
+  }
+}
+
+async function reviewFeed(scope: { productId?: string; merchantId?: string }, limit = 20) {
+  const safeLimit = Math.min(Math.max(limit, 1), 50)
+  if (scope.productId) {
+    return rows(
+      `SELECT rv.*, u.display_name, o.order_no,
+        (
+          SELECT GROUP_CONCAT(DISTINCT oi.title ORDER BY oi.created_at SEPARATOR '、')
+          FROM order_items oi
+          WHERE oi.order_id = rv.order_id AND oi.product_id = ?
+        ) item_titles
+       FROM order_reviews rv
+       JOIN orders o ON o.id = rv.order_id
+       JOIN users u ON u.id = rv.user_id
+       WHERE EXISTS (SELECT 1 FROM order_items oi WHERE oi.order_id = rv.order_id AND oi.product_id = ?)
+       ORDER BY rv.updated_at DESC
+       LIMIT ${safeLimit}`,
+      [scope.productId, scope.productId]
+    )
+  }
+
+  return rows(
+    `SELECT rv.*, u.display_name, o.order_no,
+      (
+        SELECT GROUP_CONCAT(DISTINCT oi.title ORDER BY oi.created_at SEPARATOR '、')
+        FROM order_items oi
+        JOIN products p ON p.id = oi.product_id
+        WHERE oi.order_id = rv.order_id AND p.merchant_id = ?
+      ) item_titles
+     FROM order_reviews rv
+     JOIN orders o ON o.id = rv.order_id
+     JOIN users u ON u.id = rv.user_id
+     WHERE EXISTS (
+       SELECT 1 FROM order_items oi
+       JOIN products p ON p.id = oi.product_id
+       WHERE oi.order_id = rv.order_id AND p.merchant_id = ?
+     )
+     ORDER BY rv.updated_at DESC
+     LIMIT ${safeLimit}`,
+    [scope.merchantId, scope.merchantId]
+  )
 }
 
 function couponStatus(coupon: AnyRow): 'available' | 'used' | 'expired' {
@@ -827,6 +926,44 @@ app.get('/catalog/products/:id', async (request, reply) => {
   return { product: publicProduct(product), merchant: merchant ? publicMerchant(merchant) : null, category: category ? publicCategory(category) : null }
 })
 
+app.get('/catalog/merchants/:id', async (request, reply) => {
+  const params = z.object({ id: z.string() }).parse(request.params)
+  const merchant = await row('SELECT * FROM merchants WHERE id = ?', [params.id])
+  if (!merchant) return reply.code(404).send({ message: '店铺不存在' })
+  const products = await rows(
+    `SELECT * FROM products
+     WHERE merchant_id = ? AND status = "active"
+     ORDER BY recommendation_weight DESC, virtual_sales_count DESC, created_at DESC
+     LIMIT 80`,
+    [params.id]
+  )
+  return { merchant: publicMerchant(merchant), products: products.map(publicProduct) }
+})
+
+app.get('/reviews/products/:id', async (request, reply) => {
+  const params = z.object({ id: z.string() }).parse(request.params)
+  const query = z.object({ limit: z.coerce.number().min(1).max(50).optional() }).parse(request.query)
+  const product = await row('SELECT id FROM products WHERE id = ?', [params.id])
+  if (!product) return reply.code(404).send({ message: '商品不存在' })
+  const [summary, reviews] = await Promise.all([
+    reviewSummary({ productId: params.id }),
+    reviewFeed({ productId: params.id }, query.limit ?? 20)
+  ])
+  return { summary, reviews: reviews.map(publicReviewFeedItem) }
+})
+
+app.get('/reviews/merchants/:id', async (request, reply) => {
+  const params = z.object({ id: z.string() }).parse(request.params)
+  const query = z.object({ limit: z.coerce.number().min(1).max(50).optional() }).parse(request.query)
+  const merchant = await row('SELECT id FROM merchants WHERE id = ?', [params.id])
+  if (!merchant) return reply.code(404).send({ message: '店铺不存在' })
+  const [summary, reviews] = await Promise.all([
+    reviewSummary({ merchantId: params.id }),
+    reviewFeed({ merchantId: params.id }, query.limit ?? 20)
+  ])
+  return { summary, reviews: reviews.map(publicReviewFeedItem) }
+})
+
 app.get('/catalog/merchant-sections', async (request) => {
   const query = z
     .object({
@@ -948,6 +1085,147 @@ app.delete('/cart/items/:id', async (request, reply) => {
   const cartId = await ensureCart(userId)
   await exec('DELETE FROM cart_items WHERE id = ? AND cart_id = ?', [params.id, cartId])
   return reply.code(204).send()
+})
+
+app.get('/profile/trace-summary', async (request) => {
+  const userId = await userIdFromRequest(request)
+  const cartId = await ensureCart(userId)
+  const [favorite, footprint, followed, browse] = await Promise.all([
+    row('SELECT COALESCE(SUM(quantity), 0) count FROM cart_items WHERE cart_id = ?', [cartId]),
+    row(
+      `SELECT COUNT(DISTINCT JSON_UNQUOTE(JSON_EXTRACT(properties, '$.productId'))) count
+       FROM behavior_events
+       WHERE user_id = ? AND event_name = 'product_view' AND JSON_EXTRACT(properties, '$.productId') IS NOT NULL`,
+      [userId]
+    ),
+    row('SELECT COUNT(*) count FROM merchant_follows WHERE user_id = ?', [userId]),
+    row('SELECT COUNT(*) count FROM behavior_events WHERE user_id = ?', [userId])
+  ])
+  return {
+    summary: {
+      favoriteCount: Number(favorite?.count ?? 0),
+      footprintCount: Number(footprint?.count ?? 0),
+      followedMerchantCount: Number(followed?.count ?? 0),
+      browseRecordCount: Number(browse?.count ?? 0)
+    }
+  }
+})
+
+app.get('/footprints', async (request) => {
+  const userId = await userIdFromRequest(request)
+  const query = z.object({ limit: z.coerce.number().min(1).max(100).optional() }).parse(request.query)
+  const limit = Math.min(Math.max(Number(query.limit ?? 50), 1), 100)
+  const result = await rows(
+    `SELECT p.*, fp.last_viewed_at, fp.view_count
+     FROM (
+       SELECT
+         JSON_UNQUOTE(JSON_EXTRACT(properties, '$.productId')) product_id,
+         MAX(occurred_at) last_viewed_at,
+         COUNT(*) view_count
+       FROM behavior_events
+       WHERE user_id = ? AND event_name = 'product_view' AND JSON_EXTRACT(properties, '$.productId') IS NOT NULL
+       GROUP BY product_id
+     ) fp
+     JOIN products p ON p.id = fp.product_id
+     ORDER BY fp.last_viewed_at DESC
+     LIMIT ${limit}`,
+    [userId]
+  )
+  return {
+    footprints: result.map((item) => ({
+      product: publicProduct(item),
+      lastViewedAt: iso(item.last_viewed_at),
+      viewCount: Number(item.view_count)
+    }))
+  }
+})
+
+app.get('/merchant-follows', async (request) => {
+  const userId = await userIdFromRequest(request)
+  const result = await rows(
+    `SELECT mf.id follow_id, mf.followed_at, m.*
+     FROM merchant_follows mf
+     JOIN merchants m ON m.id = mf.merchant_id
+     WHERE mf.user_id = ?
+     ORDER BY mf.followed_at DESC`,
+    [userId]
+  )
+  return { follows: result.map(publicMerchantFollow) }
+})
+
+app.get('/merchant-follows/:id/status', async (request) => {
+  const userId = await userIdFromRequest(request)
+  const params = z.object({ id: z.string() }).parse(request.params)
+  const follow = await row('SELECT id, followed_at FROM merchant_follows WHERE user_id = ? AND merchant_id = ?', [userId, params.id])
+  return { followed: Boolean(follow), followedAt: follow?.followed_at ? iso(follow.followed_at) : null }
+})
+
+app.post('/merchant-follows/:id', async (request, reply) => {
+  const userId = await userIdFromRequest(request)
+  const params = z.object({ id: z.string() }).parse(request.params)
+  const merchant = await row('SELECT id FROM merchants WHERE id = ?', [params.id])
+  if (!merchant) return reply.code(404).send({ message: '店铺不存在' })
+  await exec(
+    `INSERT INTO merchant_follows (id, user_id, merchant_id, followed_at)
+     VALUES (?, ?, ?, NOW())
+     ON DUPLICATE KEY UPDATE followed_at = VALUES(followed_at)`,
+    [`mf_${nanoid(12)}`, userId, params.id]
+  )
+  return { ok: true }
+})
+
+app.delete('/merchant-follows/:id', async (request, reply) => {
+  const userId = await userIdFromRequest(request)
+  const params = z.object({ id: z.string() }).parse(request.params)
+  await exec('DELETE FROM merchant_follows WHERE user_id = ? AND merchant_id = ?', [userId, params.id])
+  return reply.code(204).send()
+})
+
+app.get('/browse-records', async (request) => {
+  const userId = await userIdFromRequest(request)
+  const query = z.object({ limit: z.coerce.number().min(1).max(100).optional() }).parse(request.query)
+  const limit = Math.min(Math.max(Number(query.limit ?? 80), 1), 100)
+  const events = await rows(
+    `SELECT id, event_name, page_path, occurred_at, properties
+     FROM behavior_events
+     WHERE user_id = ?
+     ORDER BY occurred_at DESC
+     LIMIT ${limit}`,
+    [userId]
+  )
+  const productIds = new Set<string>()
+  const merchantIds = new Set<string>()
+  for (const event of events) {
+    const properties = json<Record<string, unknown>>(event.properties, {})
+    if (typeof properties.productId === 'string') productIds.add(properties.productId)
+    if (typeof properties.merchantId === 'string') merchantIds.add(properties.merchantId)
+  }
+  const [products, merchants] = await Promise.all([
+    productIds.size
+      ? rows(`SELECT id, title, image_url FROM products WHERE id IN (${[...productIds].map(() => '?').join(',')})`, [...productIds])
+      : Promise.resolve([]),
+    merchantIds.size
+      ? rows(`SELECT id, name, logo_url FROM merchants WHERE id IN (${[...merchantIds].map(() => '?').join(',')})`, [...merchantIds])
+      : Promise.resolve([])
+  ])
+  const productMap = new Map(products.map((product) => [product.id, product]))
+  const merchantMap = new Map(merchants.map((merchant) => [merchant.id, merchant]))
+  return {
+    records: events.map((event) => {
+      const properties = json<Record<string, unknown>>(event.properties, {})
+      const product = typeof properties.productId === 'string' ? productMap.get(properties.productId) : null
+      const merchant = typeof properties.merchantId === 'string' ? merchantMap.get(properties.merchantId) : null
+      return {
+        id: event.id,
+        eventName: event.event_name,
+        pagePath: event.page_path,
+        occurredAt: iso(event.occurred_at),
+        properties,
+        targetTitle: product?.title ?? merchant?.name ?? null,
+        targetImageUrl: product?.image_url ?? merchant?.logo_url ?? null
+      }
+    })
+  }
 })
 
 app.post('/events', async (request) => {

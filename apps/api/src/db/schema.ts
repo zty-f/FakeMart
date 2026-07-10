@@ -121,6 +121,17 @@ export const schemaSql = [
     CONSTRAINT fk_cart_item_cart FOREIGN KEY (cart_id) REFERENCES carts(id) ON DELETE CASCADE,
     CONSTRAINT fk_cart_item_product FOREIGN KEY (product_id) REFERENCES products(id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`,
+  `CREATE TABLE IF NOT EXISTS merchant_follows (
+    id VARCHAR(36) PRIMARY KEY,
+    user_id VARCHAR(36) NOT NULL,
+    merchant_id VARCHAR(36) NOT NULL,
+    followed_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uk_merchant_follow (user_id, merchant_id),
+    KEY idx_merchant_follows_user (user_id, followed_at),
+    KEY idx_merchant_follows_merchant (merchant_id),
+    CONSTRAINT fk_merchant_follow_user FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT fk_merchant_follow_merchant FOREIGN KEY (merchant_id) REFERENCES merchants(id)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`,
   `CREATE TABLE IF NOT EXISTS orders (
     id VARCHAR(36) PRIMARY KEY,
     order_no VARCHAR(40) NOT NULL UNIQUE,

@@ -110,6 +110,32 @@ export interface OrderReview {
   updatedAt: string
 }
 
+export interface ReviewSummary {
+  count: number
+  averageRating: number
+  distribution: Array<{
+    rating: number
+    count: number
+  }>
+  topTags: Array<{
+    tag: string
+    count: number
+  }>
+}
+
+export interface ReviewFeedItem {
+  id: string
+  orderId: string
+  orderNo: string
+  userDisplayName: string
+  rating: number
+  content: string
+  tags: string[]
+  itemTitles: string[]
+  createdAt: string
+  updatedAt: string
+}
+
 export interface Order {
   id: string
   orderNo: string
@@ -167,6 +193,35 @@ export interface UserCoupon {
   orderId: string | null
   canUse?: boolean
   unusableReason?: string
+}
+
+export interface ProfileTraceSummary {
+  favoriteCount: number
+  footprintCount: number
+  followedMerchantCount: number
+  browseRecordCount: number
+}
+
+export interface FootprintItem {
+  product: Product
+  lastViewedAt: string
+  viewCount: number
+}
+
+export interface MerchantFollow {
+  id: string
+  merchant: Merchant
+  followedAt: string
+}
+
+export interface BrowseRecord {
+  id: string
+  eventName: string
+  pagePath: string | null
+  occurredAt: string
+  properties: Record<string, unknown>
+  targetTitle: string | null
+  targetImageUrl: string | null
 }
 
 export interface SavingsOverview {

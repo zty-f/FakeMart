@@ -140,13 +140,7 @@ export default function Index() {
   }
 
   function openStore(section: MerchantSection) {
-    if (section.merchant.type === 'food_delivery') {
-      Taro.redirectTo({ url: '/pages/food/index' })
-      return
-    }
-    Taro.setStorageSync('fakemart_pending_merchant_id', section.merchant.id)
-    Taro.setStorageSync('fakemart_pending_merchant_name', section.merchant.name)
-    Taro.navigateTo({ url: '/pages/category/index' })
+    Taro.navigateTo({ url: `/pages/merchant/detail?id=${section.merchant.id}` })
   }
 
   const dealProducts = products.slice(0, 10)
@@ -386,8 +380,8 @@ function StoreCard({
   const isFood = merchant.type === 'food_delivery'
 
   return (
-    <View className={compact ? 'homeStoreCard compact' : 'homeStoreCard'}>
-      <View className='homeStoreHead' onClick={() => onOpen(section)}>
+    <View className={compact ? 'homeStoreCard compact' : 'homeStoreCard'} onClick={() => onOpen(section)}>
+      <View className='homeStoreHead'>
         <SafeImage className='homeStoreLogo' src={merchant.logoUrl} mode='aspectFill' label={merchant.name} />
         <View className='homeStoreInfo'>
           <View className='homeStoreTitleRow'>
@@ -407,7 +401,14 @@ function StoreCard({
       </View>
       <View className='storeProductRow'>
         {section.products.slice(0, 3).map((product) => (
-          <View className='storeProductMini' key={product.id} onClick={() => Taro.navigateTo({ url: `/pages/product/detail?id=${product.id}` })}>
+          <View
+            className='storeProductMini'
+            key={product.id}
+            onClick={(event) => {
+              event.stopPropagation()
+              Taro.navigateTo({ url: `/pages/product/detail?id=${product.id}` })
+            }}
+          >
             <SafeImage className='storeProductImage' src={product.imageUrl} mode='aspectFill' label={product.title} />
             <Text className='storeProductName'>{product.title}</Text>
             <View className='storeProductFoot'>

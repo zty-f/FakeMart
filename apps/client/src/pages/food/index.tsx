@@ -360,8 +360,8 @@ function FoodStoreCard({
   const visibleProducts = group.products.slice(0, expanded ? 8 : 2)
 
   return (
-    <View className='foodStoreCard'>
-      <View className='foodStoreHead' onClick={() => onToggle(merchant)}>
+    <View className='foodStoreCard' onClick={() => Taro.navigateTo({ url: `/pages/merchant/detail?id=${merchant.id}` })}>
+      <View className='foodStoreHead'>
         <SafeImage className='foodStoreCover' src={featuredProduct?.imageUrl || merchant.logoUrl} mode='aspectFill' label={featuredProduct?.title || merchant.name} />
         <View className='foodStoreInfo'>
           <View className='foodStoreNameRow'>
@@ -377,12 +377,19 @@ function FoodStoreCard({
             {merchant.tags.slice(0, 3).map((tag) => <Text key={tag}>{tag}</Text>)}
           </View>
         </View>
-        <Text className='foodStoreToggle'>{expanded ? '收起' : '进店'}</Text>
+        <Text className='foodStoreToggle'>进店</Text>
       </View>
 
       <View className='foodStoreCouponRow'>
         {group.products.slice(0, 3).map((product) => (
-          <View className='foodStoreCoupon' key={product.id} onClick={() => Taro.navigateTo({ url: `/pages/product/detail?id=${product.id}` })}>
+          <View
+            className='foodStoreCoupon'
+            key={product.id}
+            onClick={(event) => {
+              event.stopPropagation()
+              Taro.navigateTo({ url: `/pages/product/detail?id=${product.id}` })
+            }}
+          >
             <Text>{product.tags[0] || '热卖'}</Text>
             <Text>{formatMoney(product.virtualPrice)}</Text>
           </View>
@@ -396,7 +403,13 @@ function FoodStoreCard({
       </View>
 
       {group.products.length > 3 && (
-        <View className='foodStoreMore' onClick={() => onToggle(merchant)}>
+        <View
+          className='foodStoreMore'
+          onClick={(event) => {
+            event.stopPropagation()
+            onToggle(merchant)
+          }}
+        >
           <Text>{expanded ? '收起菜单' : `展开 ${group.products.length} 款商品`}</Text>
         </View>
       )}
@@ -416,7 +429,13 @@ function FoodProductCard({
   onOrder: (product: Product) => void
 }) {
   return (
-    <View className={expanded ? 'foodProductCard expanded' : 'foodProductCard'} onClick={() => Taro.navigateTo({ url: `/pages/product/detail?id=${product.id}` })}>
+    <View
+      className={expanded ? 'foodProductCard expanded' : 'foodProductCard'}
+      onClick={(event) => {
+        event.stopPropagation()
+        Taro.navigateTo({ url: `/pages/product/detail?id=${product.id}` })
+      }}
+    >
       <SafeImage className='foodProductImage' src={product.imageUrl} mode='aspectFill' label={product.title} />
       <View className='foodProductBody'>
         <Text className='foodProductTitle'>{product.title}</Text>

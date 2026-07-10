@@ -1,0 +1,581 @@
+.tracePage {
+  padding-top: 12px;
+  padding-bottom: 176px;
+}
+
+.traceTopBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 54px;
+  margin-bottom: 12px;
+}
+
+.traceTopBack,
+.traceTopAction {
+  display: flex;
+  flex: 0 0 auto;
+  min-width: 84px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(143, 70, 44, 0.07);
+  color: #d94e3f;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.traceTopBack text,
+.traceTopAction text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 44px;
+}
+
+.traceTopTitle {
+  flex: 1;
+  overflow: hidden;
+  color: #241b1b;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 27px;
+  font-weight: 950;
+}
+
+.traceHero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 150px;
+  padding: 18px;
+  border: 1px solid rgba(255, 210, 190, 0.72);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 86% 20%, rgba(255, 235, 124, 0.58) 0 34px, transparent 35px),
+    linear-gradient(135deg, #ff5b78 0%, #ff8758 54%, #ffd166 100%);
+  box-shadow: 0 14px 30px rgba(255, 91, 80, 0.18);
+}
+
+.traceHero.blue {
+  background:
+    radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.55) 0 31px, transparent 32px),
+    linear-gradient(135deg, #36c5f0 0%, #7adf8e 54%, #ffe66d 100%);
+}
+
+.traceHero.green {
+  background:
+    radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.55) 0 31px, transparent 32px),
+    linear-gradient(135deg, #24c6a3 0%, #7adf8e 50%, #ffd166 100%);
+}
+
+.traceHero.purple {
+  background:
+    radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.5) 0 31px, transparent 32px),
+    linear-gradient(135deg, #8b5cf6 0%, #ff6fae 52%, #ffc857 100%);
+}
+
+.traceHeroCopy {
+  flex: 1;
+  min-width: 0;
+}
+
+.traceHeroLabel {
+  display: block;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 19px;
+  font-weight: 850;
+}
+
+.traceHeroTitle {
+  display: block;
+  margin-top: 6px;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 950;
+  line-height: 1.1;
+}
+
+.traceHeroText {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 20px;
+  font-weight: 850;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.traceHeroMetric {
+  display: grid;
+  flex: 0 0 auto;
+  width: 116px;
+  min-height: 92px;
+  place-items: center;
+  align-content: center;
+  gap: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.traceHeroMetric text:first-child {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  color: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 30px;
+  font-weight: 950;
+}
+
+.traceHeroMetric text:last-child {
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 17px;
+  font-weight: 850;
+}
+
+.traceSearch {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 218, 202, 0.96);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 10px 24px rgba(134, 63, 42, 0.08);
+}
+
+.traceSearch input {
+  flex: 1;
+  min-width: 0;
+  height: 62px;
+  border: 0;
+  color: #2a2220;
+  font-size: 21px;
+  font-weight: 850;
+}
+
+.traceSearch text {
+  flex: 0 0 auto;
+  color: #ff4f51;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.traceFilterRow {
+  display: flex;
+  gap: 10px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  margin-top: 12px;
+}
+
+.traceFilter {
+  display: flex;
+  flex: 0 0 auto;
+  min-width: 88px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  color: #7d574d;
+  font-size: 19px;
+  font-weight: 950;
+  box-shadow: 0 8px 18px rgba(143, 70, 44, 0.06);
+}
+
+.traceFilter.active {
+  border-color: #ff8f76;
+  background: #fff0e8;
+  color: #ff4f51;
+  box-shadow: 0 10px 22px rgba(255, 91, 80, 0.12);
+}
+
+.traceFilter text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.traceList {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.traceCard {
+  overflow: hidden;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: 14px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(132, 74, 64, 0.08);
+}
+
+.traceCardHead,
+.traceCardFoot,
+.traceCardActions,
+.traceMerchantStats,
+.traceTimelineHead {
+  display: flex;
+  align-items: center;
+}
+
+.traceCardHead,
+.traceCardFoot,
+.traceTimelineHead {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.traceCardTitle {
+  display: block;
+  overflow: hidden;
+  color: #241b1b;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 24px;
+  font-weight: 950;
+  line-height: 1.2;
+}
+
+.traceCardMeta,
+.traceCardText {
+  display: block;
+  overflow: hidden;
+  margin-top: 6px;
+  color: #8f766c;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 17px;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.traceMediaRow {
+  display: flex;
+  gap: 12px;
+  min-width: 0;
+}
+
+.traceImage {
+  flex: 0 0 auto;
+  width: 118px;
+  height: 118px;
+  border-radius: 8px;
+  background: #fff1ea;
+}
+
+.traceBody {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.traceTagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.traceTagRow text {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #fff0e7;
+  color: #d94e3f;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.tracePriceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  margin-top: auto;
+}
+
+.tracePrice {
+  overflow: hidden;
+  color: #ff4f51;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 27px;
+  font-weight: 950;
+}
+
+.traceCompare {
+  overflow: hidden;
+  color: #b9a6a0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 17px;
+  text-decoration: line-through;
+}
+
+.traceCardFoot {
+  margin-top: 12px;
+}
+
+.traceCardFoot > text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: #2c9e79;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.traceCardActions {
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.traceMiniButton {
+  display: flex;
+  min-width: 74px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 950;
+}
+
+.traceMiniButton.primary {
+  background: linear-gradient(135deg, #ff5b5c 0%, #ff7f4f 100%);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(255, 91, 80, 0.16);
+}
+
+.traceMiniButton.secondary {
+  border: 1px solid #ffd7c9;
+  background: #fff8f4;
+  color: #d94e3f;
+}
+
+.traceMiniButton.green {
+  background: #2ebf9b;
+  color: #fff;
+}
+
+.traceMiniButton text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 42px;
+}
+
+.traceMerchantLogo {
+  flex: 0 0 auto;
+  width: 96px;
+  height: 96px;
+  border-radius: 8px;
+  background: #fff1ea;
+}
+
+.traceMerchantStats {
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.traceMerchantStats text {
+  padding: 6px 9px;
+  border-radius: 7px;
+  background: #fff7dc;
+  color: #9a5a15;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.traceTimelineList {
+  display: grid;
+  gap: 10px;
+}
+
+.traceTimelineItem {
+  position: relative;
+  display: flex;
+  gap: 11px;
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(143, 70, 44, 0.06);
+}
+
+.traceTimelineDot {
+  flex: 0 0 auto;
+  width: 13px;
+  height: 13px;
+  margin-top: 6px;
+  border: 3px solid #fff2e8;
+  border-radius: 999px;
+  background: #ff5b5c;
+  box-shadow: 0 0 0 2px #ffab8f;
+}
+
+.traceTimelineBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.traceTimelineHead > view {
+  flex: 1;
+  min-width: 0;
+}
+
+.traceTimelineType {
+  display: inline-flex;
+  margin-bottom: 5px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #fff0e7;
+  color: #d94e3f;
+  font-size: 15px;
+  font-weight: 950;
+}
+
+.traceTimelineTitle {
+  display: block;
+  overflow: hidden;
+  color: #241b1b;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.traceTimelineTime {
+  flex: 0 0 auto;
+  color: #9d7c72;
+  font-size: 16px;
+  font-weight: 850;
+}
+
+.traceTimelineText {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-top: 7px;
+  color: #6d5148;
+  font-size: 17px;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.traceTimelineImage {
+  flex: 0 0 auto;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  background: #fff1ea;
+}
+
+.traceEmpty {
+  display: grid;
+  place-items: center;
+  gap: 9px;
+  min-height: 210px;
+  padding: 22px 16px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(132, 74, 64, 0.08);
+  text-align: center;
+}
+
+.traceEmptyMark {
+  display: flex;
+  width: 62px;
+  height: 62px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff5b78, #ffd166);
+  color: #fff;
+  font-size: 24px;
+  font-weight: 950;
+}
+
+.traceEmptyTitle {
+  color: #241b1b;
+  font-size: 24px;
+  font-weight: 950;
+}
+
+.traceEmptyText {
+  max-width: 360px;
+  color: #8f766c;
+  font-size: 18px;
+  font-weight: 850;
+  line-height: 1.4;
+}
+
+@media (max-width: 390px) {
+  .traceHero {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .traceHeroMetric {
+    width: 100%;
+    min-height: 68px;
+    grid-template-columns: auto auto;
+    justify-content: center;
+  }
+
+  .traceMediaRow {
+    align-items: stretch;
+  }
+
+  .traceImage {
+    width: 104px;
+    height: 112px;
+  }
+
+  .traceCardFoot {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .traceCardActions {
+    width: 100%;
+  }
+
+  .traceMiniButton {
+    flex: 1;
+  }
+}

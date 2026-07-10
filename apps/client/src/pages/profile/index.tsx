@@ -1,7 +1,7 @@
 import { Input, Text, Textarea, View } from '@tarojs/components'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { useState } from 'react'
-import { ORDER_STATUS_LABELS, type CartItem, type Order, type SavingsOverview } from '@fakemart/shared'
+import { ORDER_STATUS_LABELS, type Order, type ProfileTraceSummary, type SavingsOverview } from '@fakemart/shared'
 import { BottomNav } from '../../components/BottomNav'
 import { SafeImage } from '../../components/SafeImage'
 import memberReward from '../../assets/illustrations/member-reward-cutout.png'
@@ -44,7 +44,7 @@ export default function ProfilePage() {
   const [user, setUser] = useState<UserProfile | null>(null)
   const [savings, setSavings] = useState<SavingsOverview | null>(null)
   const [orders, setOrders] = useState<Order[]>([])
-  const [favoriteCount, setFavoriteCount] = useState(0)
+  const [traceSummary, setTraceSummary] = useState<ProfileTraceSummary>({ favoriteCount: 0, footprintCount: 0, followedMerchantCount: 0, browseRecordCount: 0 })
   const [couponStats, setCouponStats] = useState<CouponStats>({ available: 0, used: 0, expired: 0 })
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -55,18 +55,18 @@ export default function ProfilePage() {
 
   async function load() {
     await ensureAuth()
-    const [me, savingsResult, orderResult, cartResult, couponResult] = await Promise.all([
+    const [me, savingsResult, orderResult, traceResult, couponResult] = await Promise.all([
       request<{ user: UserProfile }>('/auth/me'),
       request<{ overview: SavingsOverview }>('/analytics/savings'),
       request<{ orders: Order[] }>('/orders'),
-      request<{ items: CartItem[] }>('/cart'),
+      request<{ summary: ProfileTraceSummary }>('/profile/trace-summary'),
       request<{ stats: CouponStats }>('/coupons/center')
     ])
     setUser(me.user)
     setAddressDraft(syncDefaultAddress(me.user?.defaultAddressLabel))
     setSavings(savingsResult.overview)
     setOrders(orderResult.orders)
-    setFavoriteCount(cartResult.items.reduce((sum, item) => sum + item.quantity, 0))
+    setTraceSummary(traceResult.summary)
     setCouponStats(couponResult.stats)
     if (me.user?.username) setUsername(me.user.username)
     track('page_view', { name: 'profile' }, '/pages/profile/index')
@@ -192,7 +192,19 @@ export default function ProfilePage() {
   }
 
   function openFavorites() {
-    Taro.redirectTo({ url: '/pages/cart/index' })
+    Taro.navigateTo({ url: '/pages/favorites/index' })
+  }
+
+  function openFootprints() {
+    Taro.navigateTo({ url: '/pages/footprints/index' })
+  }
+
+  function openFollowing() {
+    Taro.navigateTo({ url: '/pages/following/index' })
+  }
+
+  function openBrowseHistory() {
+    Taro.navigateTo({ url: '/pages/browse-history/index' })
   }
 
   const recentOrders = orders.slice(0, 3)
@@ -352,22 +364,22 @@ export default function ProfilePage() {
         <View onClick={openFavorites}>
           <SafeImage className='profileTraceIcon' src={starIcon} mode='aspectFit' label='收藏夹' />
           <Text>收藏夹</Text>
-          <Text>{favoriteCount}</Text>
+          <Text>{traceSummary.favoriteCount}</Text>
         </View>
-        <View onClick={showDeveloping}>
+        <View onClick={openFootprints}>
           <SafeImage className='profileTraceIcon' src={footprintsIcon} mode='aspectFit' label='足迹' />
           <Text>足迹</Text>
-          <Text>156</Text>
+          <Text>{traceSummary.footprintCount}</Text>
         </View>
-        <View onClick={showDeveloping}>
+        <View onClick={openFollowing}>
           <SafeImage className='profileTraceIcon' src={storeIcon} mode='aspectFit' label='关注店铺' />
           <Text>关注店铺</Text>
-          <Text>18</Text>
+          <Text>{traceSummary.followedMerchantCount}</Text>
         </View>
-        <View onClick={showDeveloping}>
+        <View onClick={openBrowseHistory}>
           <SafeImage className='profileTraceIcon' src={clockIcon} mode='aspectFit' label='浏览记录' />
           <Text>浏览记录</Text>
-          <Text>42</Text>
+          <Text>{traceSummary.browseRecordCount}</Text>
         </View>
       </View>
 
