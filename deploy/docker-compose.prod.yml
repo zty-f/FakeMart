@@ -1,0 +1,62 @@
+name: fakemart
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: fakemart-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: fakemart
+      TZ: Asia/Shanghai
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-time-zone=+08:00
+    volumes:
+      - fakemart_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  api:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.api
+    container_name: fakemart-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: mysql://root:${MYSQL_ROOT_PASSWORD}@mysql:3306/fakemart
+      API_PORT: 4000
+      API_HOST: 0.0.0.0
+      CORS_ORIGIN: http://${PUBLIC_HOST},http://${PUBLIC_HOST}/admin,http://${PUBLIC_HOST}/admin/
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      NODE_ENV: production
+      TZ: Asia/Shanghai
+    depends_on:
+      mysql:
+        condition: service_healthy
+    expose:
+      - "4000"
+
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.web
+      args:
+        TARO_APP_API_BASE: /fakemart/api
+        TARO_H5_PUBLIC_PATH: /fakemart/
+        VITE_API_BASE: /fakemart/api
+        VITE_ADMIN_BASE: /fakemart/admin/
+    container_name: fakemart-web
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+
+volumes:
+  fakemart_mysql_data:

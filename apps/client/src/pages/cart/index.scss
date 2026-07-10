@@ -1,0 +1,194 @@
+.cartPage {
+  padding-bottom: 244px;
+}
+
+.cartAddressPanel {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+  padding: 14px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(143, 70, 44, 0.08);
+}
+
+.cartAddressHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cartAddressHead > text:last-child {
+  flex: 0 0 auto;
+  color: #ff5b5c;
+  font-size: 17px;
+  font-weight: 950;
+}
+
+.cartAddressText {
+  display: block;
+  color: #241b1b;
+  font-size: 22px;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.cartCouponPanel {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding: 14px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(143, 70, 44, 0.08);
+}
+
+.cartCouponHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cartCouponHead text:first-child {
+  color: #241b1b;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.cartCouponHead text:last-child {
+  color: #ff5b78;
+  font-size: 17px;
+  font-weight: 950;
+}
+
+.cartCouponList {
+  display: flex;
+  gap: 9px;
+  overflow-x: auto;
+}
+
+.cartCouponChip {
+  display: grid;
+  flex: 0 0 auto;
+  min-width: 154px;
+  min-height: 62px;
+  align-content: center;
+  gap: 3px;
+  padding: 8px 11px;
+  border: 1px solid #ffd6df;
+  border-radius: 8px;
+  background: #fff7f9;
+  color: #ff4f67;
+}
+
+.cartCouponChip.none {
+  min-width: 86px;
+  place-items: center;
+}
+
+.cartCouponChip.active {
+  border-color: #ff5b78;
+  background: linear-gradient(135deg, #fff0f5, #fff8e7);
+  box-shadow: 0 8px 16px rgba(255, 91, 120, 0.14);
+}
+
+.cartCouponChip text:first-child {
+  display: block;
+  overflow: hidden;
+  color: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 950;
+}
+
+.cartCouponChip text:last-child {
+  color: #ff4f51;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.cartCouponEmpty {
+  padding: 12px;
+  border-radius: 8px;
+  background: #fff7f9;
+  color: #ff5b78;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.cartCouponEmpty text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.cartItem {
+  position: relative;
+}
+
+.cartItem .productFoot {
+  padding-right: 86px;
+}
+
+.cartRemoveButton {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  width: 68px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffd2c4;
+  border-radius: 8px;
+  background: #fff8f4;
+  color: #d94e3f;
+  font-size: 18px;
+  font-weight: 950;
+  box-shadow: 0 8px 16px rgba(132, 74, 64, 0.08);
+}
+
+.cartRemoveButton text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.cartFooter {
+  position: fixed;
+  left: 50%;
+  bottom: 114px;
+  display: flex;
+  width: 100%;
+  max-width: 520px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  transform: translateX(-50%);
+  border-top: 1px solid #ffe0d2;
+  border-radius: 8px 8px 0 0;
+  background: #fff;
+  box-shadow: 0 -8px 22px rgba(143, 70, 44, 0.08);
+}
+
+.cartFooter > view {
+  flex: 1;
+}
+
+.cartFooter .primaryButton {
+  width: 240px;
+}
+
+.cartCouponDiscount {
+  display: block;
+  margin-top: 4px;
+  color: #2c9e79;
+  font-size: 15px;
+  font-weight: 900;
+}

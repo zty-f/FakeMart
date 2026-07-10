@@ -1,0 +1,44 @@
+FROM node:22-bookworm-slim AS build
+
+WORKDIR /app
+
+ENV CI=true \
+  PNPM_HOME=/pnpm \
+  XDG_CONFIG_HOME=/tmp/.config \
+  NPM_CONFIG_UPDATE_NOTIFIER=false
+
+RUN npm config set registry https://registry.npmmirror.com \
+  && npm install -g pnpm@10.33.0
+
+RUN mkdir -p /pnpm/store \
+  && printf 'registry=https://registry.npmmirror.com\nfetch-retries=5\nfetch-retry-mintimeout=10000\nfetch-retry-maxtimeout=120000\nstore-dir=/pnpm/store\npackage-import-method=copy\nnode-linker=hoisted\n' > .npmrc
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.base.json ./
+COPY apps/client/package.json apps/client/package.json
+COPY apps/admin/package.json apps/admin/package.json
+COPY packages/shared/package.json packages/shared/package.json
+
+RUN pnpm install --frozen-lockfile --ignore-scripts
+
+COPY apps/client apps/client
+COPY apps/admin apps/admin
+COPY packages/shared packages/shared
+
+ARG TARO_APP_API_BASE=/api
+ARG TARO_H5_PUBLIC_PATH=/
+ARG VITE_API_BASE=/api
+ARG VITE_ADMIN_BASE=/
+ENV TARO_APP_API_BASE=${TARO_APP_API_BASE}
+ENV TARO_H5_PUBLIC_PATH=${TARO_H5_PUBLIC_PATH}
+ENV VITE_API_BASE=${VITE_API_BASE}
+ENV VITE_ADMIN_BASE=${VITE_ADMIN_BASE}
+ENV NODE_ENV=production
+
+RUN pnpm --filter @fakemart/client build:h5
+RUN pnpm --filter @fakemart/admin build
+
+FROM nginx:1.27-alpine
+
+COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/apps/client/dist /usr/share/nginx/html/client
+COPY --from=build /app/apps/admin/dist /usr/share/nginx/html/admin

@@ -1,0 +1,374 @@
+.couponsPage {
+  padding-top: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 227, 236, 0.96) 0, rgba(255, 247, 244, 0) 280px),
+    #fff7f3;
+}
+
+.couponTopBar {
+  display: flex;
+  height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 8px 20px rgba(132, 74, 64, 0.08);
+}
+
+.couponTopBar text {
+  color: #241b1b;
+  font-size: 20px;
+  font-weight: 950;
+}
+
+.couponTopBar text:first-child {
+  display: flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #fff0f4;
+  color: #ff5b78;
+  font-size: 30px;
+  line-height: 34px;
+}
+
+.couponTopBar text:last-child {
+  color: #ff5b78;
+  font-size: 17px;
+}
+
+.couponHero {
+  display: flex;
+  min-height: 168px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 12px;
+  padding: 18px;
+  overflow: hidden;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 88% 22%, rgba(255, 255, 255, 0.34) 0 42px, transparent 43px),
+    linear-gradient(135deg, #ff5b78 0%, #ff82b1 52%, #ffc15f 100%);
+  box-shadow: 0 14px 30px rgba(255, 91, 120, 0.2);
+}
+
+.couponHero > view {
+  flex: 1;
+  min-width: 0;
+}
+
+.couponHeroLabel {
+  display: block;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 19px;
+  font-weight: 850;
+}
+
+.couponHeroTitle {
+  display: block;
+  margin-top: 6px;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 950;
+  line-height: 1.12;
+}
+
+.couponHeroText {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 19px;
+  line-height: 1.42;
+}
+
+.couponHeroIcon {
+  flex: 0 0 auto;
+  width: 118px;
+  height: 118px;
+  filter: drop-shadow(0 10px 14px rgba(122, 30, 54, 0.16));
+}
+
+.couponStats,
+.couponTabs,
+.couponCard,
+.couponEmpty,
+.couponUseTrack > view {
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(132, 74, 64, 0.08);
+}
+
+.couponStats {
+  display: flex;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.couponStats > view {
+  flex: 1;
+  min-height: 82px;
+  padding: 12px 8px;
+  text-align: center;
+  border-right: 1px solid #ffe4dc;
+}
+
+.couponStats > view:last-child {
+  border-right: 0;
+}
+
+.couponStats text:first-child {
+  display: block;
+  color: #ff4f67;
+  font-size: 25px;
+  font-weight: 950;
+}
+
+.couponStats text:last-child {
+  display: block;
+  margin-top: 5px;
+  color: #8f766c;
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.couponTabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 6px;
+}
+
+.couponTab {
+  display: flex;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: #8f766c;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.couponTab text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.couponTab.active {
+  background: linear-gradient(135deg, #ff5b78, #ff8758);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(255, 91, 120, 0.18);
+}
+
+.couponList {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.couponCard {
+  position: relative;
+  display: flex;
+  min-height: 124px;
+  overflow: hidden;
+}
+
+.couponCard::before,
+.couponCard::after {
+  position: absolute;
+  left: 112px;
+  z-index: 1;
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff7f3;
+  content: "";
+}
+
+.couponCard::before {
+  top: -9px;
+}
+
+.couponCard::after {
+  bottom: -9px;
+}
+
+.couponCard.unavailable {
+  opacity: 0.68;
+  filter: grayscale(0.2);
+}
+
+.couponAmount {
+  display: flex;
+  flex: 0 0 121px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 6px;
+  background:
+    radial-gradient(circle at 26% 20%, rgba(255, 255, 255, 0.32) 0 18px, transparent 19px),
+    linear-gradient(135deg, #ff5b78, #ff8a5b);
+  color: #fff;
+}
+
+.couponAmount text:first-child {
+  color: inherit;
+  font-size: 35px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.couponAmount text:last-child {
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.couponBody {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 12px;
+}
+
+.couponTitle {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #241b1b;
+  font-size: 22px;
+  font-weight: 950;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.couponDesc {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-top: 6px;
+  color: #8f766c;
+  font-size: 16px;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.couponTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.couponTags text {
+  padding: 4px 7px;
+  border-radius: 6px;
+  background: #fff0f4;
+  color: #ff5b78;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.couponAction,
+.couponStatusPill {
+  display: flex;
+  flex: 0 0 auto;
+  width: 72px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  background: #fff7f3;
+  color: #ff4f67;
+  font-size: 17px;
+  font-weight: 950;
+  text-align: center;
+}
+
+.couponAction text,
+.couponStatusPill text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1.2;
+}
+
+.couponAction.disabled {
+  color: #b9a6a0;
+}
+
+.couponStatusPill {
+  width: 62px;
+  color: #8f766c;
+  font-size: 15px;
+}
+
+.couponEmpty {
+  padding: 30px 16px;
+  text-align: center;
+}
+
+.couponEmpty text:first-child {
+  display: block;
+  color: #241b1b;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.couponEmpty text:last-child {
+  display: block;
+  margin-top: 7px;
+  color: #8f766c;
+  font-size: 17px;
+}
+
+.couponUseStrip {
+  width: 100%;
+}
+
+.couponUseTrack {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  min-width: 100%;
+}
+
+.couponUseTrack > view {
+  display: flex;
+  width: 136px;
+  height: 68px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #ff5b78;
+  font-size: 17px;
+  font-weight: 950;
+}
+
+.couponUseTrack text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.couponUseIcon {
+  width: 36px;
+  height: 36px;
+}
+
+.couponGroupTitle {
+  display: block;
+  margin: 4px 2px -2px;
+  color: #8f766c;
+  font-size: 18px;
+  font-weight: 950;
+}

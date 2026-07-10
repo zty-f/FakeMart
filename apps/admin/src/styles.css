@@ -1,0 +1,825 @@
+:root {
+  color: #20252b;
+  background: #f3f5f7;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei",
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 236px minmax(0, 1fr);
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100vh;
+  padding: 22px 16px;
+  border-right: 1px solid #e2e6ea;
+  background: #101820;
+  color: #fff;
+  overflow: hidden;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand.large {
+  margin-bottom: 18px;
+  color: #20252b;
+}
+
+.brandMark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 8px;
+  background: #08a878;
+  color: #fff;
+  font-weight: 900;
+}
+
+.brand strong {
+  display: block;
+  font-size: 18px;
+}
+
+.brand span {
+  display: block;
+  margin-top: 3px;
+  color: #98a4af;
+  font-size: 12px;
+}
+
+.brand.large span {
+  color: #68737d;
+}
+
+nav {
+  display: grid;
+  gap: 8px;
+}
+
+.navButton,
+.ghostButton,
+.secondaryButton,
+.primaryButton,
+.iconButton,
+.segmented,
+.linkButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 8px;
+  min-height: 38px;
+}
+
+.navButton {
+  justify-content: flex-start;
+  padding: 0 12px;
+  background: transparent;
+  color: #c6d0d9;
+}
+
+.navButton.active {
+  background: #20313b;
+  color: #fff;
+  font-weight: 800;
+}
+
+.ghostButton {
+  margin-top: auto;
+  background: #20313b;
+  color: #dce6ef;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.secondaryButton {
+  padding: 0 14px;
+  border: 1px solid #d8dee5;
+  background: #fff;
+  color: #116457;
+}
+
+.secondaryButton.compact {
+  min-height: 32px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+.secondaryButton.danger {
+  border-color: #ffd4ca;
+  color: #c43d2b;
+}
+
+.primaryButton {
+  width: 100%;
+  background: #08a878;
+  color: #fff;
+  font-weight: 800;
+}
+
+.primaryButton.inline {
+  width: auto;
+  min-width: 112px;
+  padding: 0 16px;
+}
+
+.iconButton {
+  width: 34px;
+  height: 34px;
+  background: #eef7f4;
+  color: #08745e;
+}
+
+.main {
+  overflow-x: hidden;
+  min-width: 0;
+  padding: 26px;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.pageHeader h1 {
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: 0;
+}
+
+.pageHeader p {
+  margin: 6px 0 0;
+  color: #6b7680;
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.metric,
+.panel,
+.loginPanel,
+.dataTable,
+.detailPanel {
+  border: 1px solid #e0e6eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.metric {
+  display: grid;
+  gap: 8px;
+  min-height: 116px;
+  padding: 14px;
+}
+
+.metricIcon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 8px;
+  background: #eef7f4;
+  color: #08745e;
+}
+
+.metric span {
+  color: #6b7680;
+  font-size: 13px;
+}
+
+.metric strong {
+  font-size: 21px;
+}
+
+.twoColumns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.panel {
+  padding: 16px;
+}
+
+.panel h2,
+.detailPanel h2,
+.detailPanel h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+.detailPanel h3 {
+  margin-top: 18px;
+}
+
+.chart {
+  min-height: 240px;
+}
+
+.list {
+  display: grid;
+  gap: 8px;
+}
+
+.listRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #edf1f4;
+}
+
+.listRow:last-child {
+  border-bottom: 0;
+}
+
+.listRow strong,
+.productCell strong,
+.compactItem strong,
+.timelineItem strong {
+  display: block;
+}
+
+.listRow span,
+.productCell span,
+.compactItem span,
+.timelineItem span,
+.timelineItem small,
+.linkButton small {
+  display: block;
+  margin-top: 4px;
+  color: #6b7680;
+  font-size: 12px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-bottom: 12px;
+  padding: 0 12px;
+  border: 1px solid #e0e6eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.toolbar input {
+  width: 100%;
+  height: 40px;
+  border: 0;
+  outline: 0;
+}
+
+.toolbar select {
+  min-width: 140px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #d8dee5;
+  border-radius: 8px;
+  background: #fff;
+  color: #20252b;
+  outline: 0;
+}
+
+.orderToolbar input {
+  min-width: 260px;
+}
+
+.segmentedToolbar {
+  flex-wrap: wrap;
+  padding: 8px 12px;
+}
+
+.segmented {
+  min-width: 74px;
+  padding: 0 12px;
+  background: #f3f5f7;
+  color: #52606b;
+}
+
+.segmented.active {
+  background: #e6f7f2;
+  color: #08745e;
+  font-weight: 800;
+}
+
+.workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  gap: 14px;
+  align-items: start;
+}
+
+.dataTable {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.tableHead,
+.tableRow {
+  display: grid;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+}
+
+.tableHead {
+  min-height: 42px;
+  background: #f8fafb;
+  color: #6b7680;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.tableRow {
+  min-height: 58px;
+  border-top: 1px solid #edf1f4;
+}
+
+.tableRow.selected {
+  background: #f0fbf7;
+}
+
+.orderCols {
+  grid-template-columns: minmax(190px, 1.35fr) 66px 100px 100px 72px minmax(150px, 1fr) 118px;
+}
+
+.productCols {
+  grid-template-columns: minmax(280px, 2fr) 80px 110px 80px 90px 132px;
+}
+
+.eventCols {
+  grid-template-columns: 160px minmax(220px, 1fr) 80px 170px minmax(260px, 1fr);
+}
+
+.merchantCols {
+  grid-template-columns: minmax(260px, 1.5fr) 90px 80px 100px minmax(180px, 1fr) 92px;
+}
+
+.categoryCols {
+  grid-template-columns: minmax(180px, 1fr) 150px 80px minmax(240px, 1.4fr) 92px;
+}
+
+.couponCols {
+  grid-template-columns: minmax(240px, 1.5fr) 72px 150px 72px 72px 100px 82px 132px;
+}
+
+.linkButton {
+  justify-content: flex-start;
+  padding: 0;
+  background: transparent;
+  color: #20252b;
+  text-align: left;
+}
+
+.statusPill {
+  display: inline-flex;
+  min-width: 76px;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: #e6f7f2;
+  color: #08745e;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.ratingCell {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  gap: 4px;
+  color: #f59e0b;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.ratingCell.muted {
+  color: #9aa4ad;
+}
+
+.mutedPill {
+  background: #eef1f3;
+  color: #65717b;
+}
+
+.detailPanel {
+  position: sticky;
+  top: 18px;
+  padding: 16px;
+}
+
+.detailHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.detailHeader p {
+  margin: 4px 0 0;
+  color: #6b7680;
+}
+
+.reviewBox {
+  margin: 14px 0;
+  padding: 12px;
+  border: 1px solid #ffe0d2;
+  border-radius: 8px;
+  background: #fff8f4;
+}
+
+.reviewBoxHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.reviewBoxHead strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #f59e0b;
+}
+
+.reviewBoxHead span {
+  color: #6b7680;
+  font-size: 12px;
+}
+
+.reviewBox p {
+  margin: 8px 0 0;
+  color: #34414c;
+  line-height: 1.5;
+}
+
+.reviewTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.reviewTags span {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #fff0e8;
+  color: #d94e3f;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.emptyReview {
+  color: #7b8791;
+  font-weight: 700;
+}
+
+.compactItem {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #edf1f4;
+}
+
+.compactItem img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #eef1f3;
+}
+
+.timeline {
+  display: grid;
+  gap: 8px;
+}
+
+.timelineItem {
+  padding-left: 12px;
+  border-left: 3px solid #08a878;
+}
+
+.productCell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.productCell img {
+  width: 54px;
+  height: 54px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #eef1f3;
+}
+
+.productEditor {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 14px;
+  padding: 16px;
+  border: 1px solid #e0e6eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.editorHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.editorHead h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.editorHead p {
+  margin: 5px 0 0;
+  color: #6b7680;
+}
+
+.editorActions,
+.rowActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ellipsisText {
+  overflow: hidden;
+  min-width: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.categoryCell {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+}
+
+.categoryCell span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 8px;
+  background: #fff3ef;
+  color: #ff5b5c;
+  font-weight: 900;
+}
+
+.categoryCell strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.couponCell {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.couponCell strong,
+.couponCell span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.couponCell span {
+  color: #6b7680;
+  font-size: 12px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.formGrid label {
+  display: grid;
+  gap: 7px;
+  color: #40504a;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.formGrid input,
+.formGrid select,
+.formGrid textarea {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 11px;
+  border: 1px solid #d5dee6;
+  border-radius: 8px;
+  background: #fff;
+  color: #20252b;
+  outline: 0;
+}
+
+.formGrid textarea {
+  min-height: 82px;
+  padding: 10px 11px;
+  resize: vertical;
+}
+
+.spanTwo {
+  grid-column: span 2;
+}
+
+.successMessage {
+  margin: 0;
+  color: #08745e;
+  font-weight: 800;
+}
+
+.eventCols code {
+  overflow: auto;
+  max-height: 54px;
+  padding: 6px;
+  border-radius: 6px;
+  background: #f4f6f8;
+  color: #3d4952;
+  font-size: 12px;
+}
+
+.emptyState {
+  padding: 40px 12px;
+  color: #6b7680;
+  text-align: center;
+}
+
+.loginPage {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+  background: #eef3f5;
+}
+
+.loginPanel {
+  display: grid;
+  gap: 14px;
+  width: min(420px, 100%);
+  padding: 24px;
+}
+
+.loginPanel label {
+  display: grid;
+  gap: 8px;
+  color: #40504a;
+  font-weight: 800;
+}
+
+.loginPanel input {
+  height: 42px;
+  border: 1px solid #d5dee6;
+  border-radius: 8px;
+  padding: 0 12px;
+}
+
+.error {
+  margin: 0;
+  color: #b42318;
+}
+
+@media (max-width: 1100px) {
+  .shell,
+  .workbench {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+    max-width: 100vw;
+    height: auto;
+  }
+
+  .metricGrid,
+  .twoColumns,
+  .formGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .detailPanel {
+    position: static;
+  }
+}
+
+@media (max-width: 760px) {
+  .main {
+    width: 100%;
+    max-width: 100vw;
+    padding: 16px;
+  }
+
+  .pageHeader {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .orderToolbar {
+    flex-wrap: wrap;
+    padding: 8px 12px;
+  }
+
+  .orderToolbar input {
+    min-width: 0;
+    flex: 1 1 180px;
+  }
+
+  .metricGrid,
+  .twoColumns,
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .spanTwo {
+    grid-column: span 1;
+  }
+
+  .dataTable {
+    overflow-x: auto;
+  }
+
+  .tableHead,
+  .tableRow {
+    width: max-content;
+    min-width: 860px;
+  }
+
+  .merchantCols {
+    min-width: 900px;
+  }
+
+  .categoryCols {
+    min-width: 820px;
+  }
+}

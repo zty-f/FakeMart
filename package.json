@@ -1,0 +1,23 @@
+{
+  "name": "fakemart",
+  "version": "0.1.0",
+  "private": true,
+  "description": "假装购 FakeMart virtual shopping platform",
+  "scripts": {
+    "dev": "pnpm --parallel --filter @fakemart/api --filter @fakemart/admin --filter @fakemart/client dev",
+    "dev:api": "pnpm --filter @fakemart/api dev",
+    "dev:admin": "pnpm --filter @fakemart/admin dev",
+    "dev:client": "pnpm --filter @fakemart/client dev:h5",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "db:init": "pnpm --filter @fakemart/api db:init",
+    "db:seed": "pnpm --filter @fakemart/api db:seed",
+    "data:import:dummyjson": "pnpm --filter @fakemart/api data:import:dummyjson"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "packageManager": "pnpm@10.33.0"
+}

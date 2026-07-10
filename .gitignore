@@ -1,0 +1,13 @@
+node_modules
+dist
+build
+.taro
+.turbo
+.vite
+.dev
+coverage
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store

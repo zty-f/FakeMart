@@ -1,0 +1,295 @@
+.timeline {
+  display: grid;
+  gap: 12px;
+}
+
+.timelineItem {
+  padding: 16px;
+  border-left: 6px solid #2ebf9b;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(143, 70, 44, 0.06);
+}
+
+.timelineItem.active {
+  border-left-color: #ff5b5c;
+  box-shadow: 0 10px 22px rgba(255, 91, 80, 0.12);
+}
+
+.timelineTitle {
+  display: block;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.timelineText {
+  display: block;
+  margin-top: 6px;
+  color: #8f766c;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.orderProgress {
+  overflow: hidden;
+  height: 12px;
+  margin-top: 16px;
+  border-radius: 999px;
+  background: #edf1f4;
+}
+
+.orderAddress {
+  display: grid;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 13px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  background: #fff8f4;
+  color: #241b1b;
+  font-size: 21px;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.orderAmountPanel {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 13px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff8f4;
+}
+
+.orderAmountPanel > view {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.orderAmountPanel text:first-child {
+  color: #8f766c;
+  font-size: 18px;
+  font-weight: 850;
+}
+
+.orderAmountPanel text:last-child {
+  color: #241b1b;
+  font-size: 19px;
+  font-weight: 950;
+}
+
+.orderAmountPanel > view:nth-child(2) text:last-child {
+  color: #2c9e79;
+}
+
+.orderAmountPanel > view:last-child {
+  padding-top: 8px;
+  border-top: 1px solid #ffe4dc;
+}
+
+.orderAmountPanel > view:last-child text:last-child {
+  color: #ff4f51;
+  font-size: 23px;
+}
+
+.orderProgressBar {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff5b5c, #ffbf56, #2ebf9b);
+  transition: width 0.35s ease;
+}
+
+.liveStatus {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  background: #fff8f4;
+}
+
+.liveTitle {
+  display: block;
+  color: #241b1b;
+  font-size: 24px;
+  font-weight: 950;
+}
+
+.liveText {
+  display: block;
+  margin-top: 6px;
+  color: #8f766c;
+  font-size: 21px;
+  line-height: 1.4;
+}
+
+.payAgainButton {
+  margin-top: 14px;
+}
+
+.cancelDetailButton {
+  margin-top: 10px;
+}
+
+.refreshButton {
+  flex: 0 0 auto;
+  width: 104px;
+  height: 48px;
+  font-size: 20px;
+  line-height: 48px;
+}
+
+.refreshButton text {
+  line-height: 48px;
+}
+
+.reviewSummary,
+.reviewPrompt,
+.reviewEditor {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff8f4;
+}
+
+.reviewSummaryHead,
+.reviewPrompt,
+.reviewEditorHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.reviewStars {
+  display: block;
+  margin-top: 6px;
+  color: #ff9f1f;
+  font-size: 25px;
+  font-weight: 950;
+  letter-spacing: 0;
+}
+
+.reviewEditButton,
+.reviewPromptButton {
+  display: flex;
+  flex: 0 0 auto;
+  width: 92px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff5b5c 0%, #ff7f4f 100%);
+  color: #fff;
+  font-size: 19px;
+  font-weight: 950;
+  box-shadow: 0 8px 18px rgba(255, 91, 80, 0.18);
+}
+
+.reviewEditButton text,
+.reviewPromptButton text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 44px;
+}
+
+.reviewPromptTitle {
+  display: block;
+  color: #241b1b;
+  font-size: 23px;
+  font-weight: 950;
+  line-height: 1.25;
+}
+
+.reviewPromptText,
+.reviewContent {
+  display: block;
+  margin-top: 6px;
+  color: #8f766c;
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+.reviewTagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.reviewTag {
+  display: block;
+  padding: 8px 12px;
+  border: 1px solid #ffd7c9;
+  border-radius: 999px;
+  background: #fff;
+  color: #8a6257;
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.reviewTag.selected {
+  border-color: #ff8f76;
+  background: #fff0e8;
+  color: #ff4f51;
+}
+
+.reviewClose {
+  flex: 0 0 auto;
+  color: #d94e3f;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.reviewStarsPicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.reviewStar {
+  color: #e4c8bd;
+  font-size: 38px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.reviewStar.active {
+  color: #ff9f1f;
+}
+
+.reviewRatingText {
+  margin-left: 6px;
+  color: #5b4740;
+  font-size: 20px;
+  font-weight: 950;
+}
+
+.reviewTextarea {
+  width: 100%;
+  min-height: 150px;
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  color: #241b1b;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.reviewSubmitButton {
+  height: 58px;
+  margin-top: 12px;
+  font-size: 22px;
+}
+
+.reviewSubmitButton text {
+  line-height: 58px;
+}

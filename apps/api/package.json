@@ -1,0 +1,32 @@
+{
+  "name": "@fakemart/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "db:init": "tsx src/scripts/init-db.ts",
+    "db:seed": "tsx src/scripts/seed-db.ts",
+    "data:import:dummyjson": "tsx src/scripts/import-dummyjson-products.ts"
+  },
+  "dependencies": {
+    "@fakemart/shared": "workspace:*",
+    "@fastify/cors": "^11.1.0",
+    "@fastify/jwt": "^10.0.0",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
+    "fastify": "^5.6.2",
+    "mysql2": "^3.15.3",
+    "nanoid": "^5.1.6",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

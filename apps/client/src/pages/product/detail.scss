@@ -1,0 +1,102 @@
+.detailHero {
+  overflow: hidden;
+  margin: -16px -18px 0;
+  background: #fff1ea;
+}
+
+.detailImage {
+  width: 100%;
+  height: 620px;
+  background: #fff1ea;
+}
+
+.detailCard {
+  position: relative;
+  margin-top: -34px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(143, 70, 44, 0.1);
+}
+
+.detailTitle {
+  display: block;
+  margin-top: 12px;
+  font-size: 34px;
+  font-weight: 950;
+  line-height: 1.25;
+}
+
+.detailSubtitle {
+  display: block;
+  margin-top: 10px;
+  color: #8f766c;
+  font-size: 24px;
+  line-height: 1.5;
+}
+
+.detailBadge {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #fff0e7;
+  color: #d94e3f;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.detailTags {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.detailTags text {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #fff7dc;
+  color: #b36d22;
+  font-size: 20px;
+}
+
+.savePanel {
+  display: grid;
+  gap: 10px;
+}
+
+.detailAddress {
+  display: grid;
+  gap: 5px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  background: #fff8f4;
+  color: #241b1b;
+  font-size: 21px;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.detailActions {
+  display: flex;
+  gap: 14px;
+}
+
+.detailActions .primaryButton,
+.detailActions .secondaryButton {
+  flex: 1;
+}
+
+.stickyActions {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 16px 18px 28px;
+  border-top: 1px solid #ffe0d2;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 -8px 22px rgba(143, 70, 44, 0.08);
+}

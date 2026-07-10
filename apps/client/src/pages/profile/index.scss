@@ -1,0 +1,1127 @@
+.profilePage {
+  padding-top: 12px;
+  padding-bottom: 176px;
+}
+
+.profilePage,
+.profileHeader,
+.profileMemberBar,
+.profileAddressCard,
+.profileStats,
+.profileOrderStatus,
+.profileTraceRow,
+.profileShortcutGrid,
+.profileCouponBanner,
+.profileRecentList,
+.profileAccountPanel {
+  max-width: 100%;
+}
+
+.profileHeader {
+  position: relative;
+  padding: 16px;
+  border: 1px solid rgba(255, 210, 190, 0.72);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 42%),
+    linear-gradient(135deg, #ff6f9e 0%, #ff86b1 54%, #ffb1c4 100%);
+}
+
+.profileHeaderActions {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.profileHeaderActions text {
+  display: flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  color: #241b1b;
+  font-size: 17px;
+  font-weight: 950;
+}
+
+.profileHeaderTop {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+  padding-right: 58px;
+}
+
+.profileAvatar {
+  display: flex;
+  flex: 0 0 auto;
+  width: 84px;
+  height: 84px;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff5ed;
+  color: #fff;
+  font-size: 27px;
+  font-weight: 950;
+}
+
+.profileAvatarImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.profileIdentity {
+  flex: 1;
+  min-width: 0;
+}
+
+.profileName {
+  display: block;
+  overflow: hidden;
+  color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 32px;
+  font-weight: 950;
+}
+
+.profileSub {
+  display: block;
+  overflow: hidden;
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.86);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 850;
+}
+
+.profileVipBadge {
+  display: flex;
+  flex: 0 0 52px;
+  width: 52px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.profileVipBadge text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.profileMemberBar {
+  display: flex;
+  min-height: 76px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #222733;
+  box-shadow: 0 10px 22px rgba(34, 39, 51, 0.18);
+}
+
+.profileMemberBar > view {
+  flex: 1;
+  min-width: 0;
+}
+
+.profileMemberBar > view text:first-child {
+  display: block;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.profileMemberBar > view text:last-child {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.84);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 17px;
+  font-weight: 850;
+}
+
+.profileMemberBar > text {
+  flex: 0 0 auto;
+  max-width: 112px;
+  overflow: hidden;
+  color: #ffe2a3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 23px;
+  font-weight: 950;
+}
+
+.profileBindNotice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 14px;
+  border: 2px solid #ff8ba4;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 94% 18%, rgba(255, 211, 95, 0.36) 0 34px, transparent 35px),
+    linear-gradient(135deg, #fff0f6, #fff8dd);
+  box-shadow: 0 12px 24px rgba(255, 91, 128, 0.14);
+}
+
+.profileBindNotice > view:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.profileBindTitle {
+  display: block;
+  color: #ff4f51;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.profileBindText {
+  display: block;
+  margin-top: 6px;
+  color: #8f766c;
+  font-size: 19px;
+  line-height: 1.35;
+}
+
+.profileBindButton {
+  display: flex;
+  flex: 0 0 auto;
+  width: 94px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff5b78, #ff8758);
+  box-shadow: 0 8px 18px rgba(255, 91, 120, 0.22);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.profileBindButton text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.profileAddressCard {
+  display: grid;
+  min-width: 0;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 14px;
+}
+
+.profileAddressHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.profileAddressHead > view:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.profileCardLabel {
+  display: block;
+  color: #a07363;
+  font-size: 19px;
+  font-weight: 850;
+}
+
+.profileAddress {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-top: 6px;
+  color: #241b1b;
+  font-size: 22px;
+  font-weight: 950;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.profileSmallButton {
+  display: flex;
+  flex: 0 0 auto;
+  width: 72px;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 19px;
+  font-weight: 950;
+  line-height: 46px;
+}
+
+.profileSmallButton text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 46px;
+}
+
+.profileSmallButton.primary {
+  border: 0;
+  background: linear-gradient(135deg, #ff5b5c 0%, #ff7f4f 100%);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(255, 91, 80, 0.2);
+}
+
+.profileAddressActions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.profileAddressEditor {
+  display: grid;
+  gap: 10px;
+}
+
+.profileAddressInput {
+  width: 100%;
+  min-height: 112px;
+  padding: 12px;
+  border: 1px solid #ffd7c9;
+  border-radius: 8px;
+  background: #fff8f4;
+  color: #241b1b;
+  font-size: 19px;
+  line-height: 1.45;
+}
+
+.profileAddressEditorActions {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 10px;
+}
+
+.profileAddressEditorActions .primaryButton.compact,
+.profileAddressEditorActions .secondaryButton.compact {
+  height: 48px;
+  font-size: 18px;
+}
+
+.profileAddressEditorActions .primaryButton.compact text,
+.profileAddressEditorActions .secondaryButton.compact text {
+  line-height: 48px;
+}
+
+.profileStats {
+  display: flex;
+  gap: 0;
+  overflow: hidden;
+  margin-top: 12px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(143, 70, 44, 0.08);
+}
+
+.profileStats > view {
+  flex: 1;
+  min-width: 0;
+  min-height: 110px;
+  padding: 13px 7px 10px;
+  border-right: 1px solid #ffe5da;
+  background: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+
+.profileStats > view:last-child {
+  border-right: 0;
+}
+
+.profileStatLabel {
+  display: block;
+  color: #a07363;
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.profileStatValue {
+  display: block;
+  overflow: hidden;
+  margin-top: 7px;
+  color: #ff4f51;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: 950;
+}
+
+.profileStatAction {
+  display: inline-flex;
+  min-width: 48px;
+  height: 26px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: #fff0f4;
+  color: #ff6585;
+  font-size: 14px;
+  font-weight: 950;
+}
+
+.profileOrderPanel {
+  margin-top: 14px;
+}
+
+.profileTraceRow {
+  display: flex;
+  gap: 0;
+  margin-top: 12px;
+  padding: 12px 8px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(143, 70, 44, 0.08);
+}
+
+.profileTraceRow > view {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.profileTraceRow > view text:first-child {
+  display: block;
+  color: #6b7280;
+  font-size: 25px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.profileTraceRow > view text:nth-child(2) {
+  display: block;
+  overflow: hidden;
+  margin-top: 7px;
+  color: #5b4740;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.profileTraceRow > view text:last-child {
+  display: block;
+  margin-top: 2px;
+  color: #a07363;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.profileOrderStatus {
+  display: flex;
+  min-width: 0;
+  gap: 6px;
+  padding: 12px 8px;
+}
+
+.profileOrderStatus > view {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 4px;
+  border-radius: 8px;
+  background: #fff8f4;
+  text-align: center;
+  cursor: pointer;
+}
+
+.profileStatusIcon {
+  display: block;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.profileStatusValue {
+  display: block;
+  margin-top: 6px;
+  color: #ff4f51;
+  font-size: 24px;
+  font-weight: 950;
+}
+
+.profileStatusLabel {
+  display: block;
+  margin-top: 4px;
+  color: #8f766c;
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.profileShortcutGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.profileShortcut {
+  display: flex;
+  min-height: 104px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 6px;
+  text-align: center;
+}
+
+.profileShortcutIcon {
+  display: flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  background: #fff0e8;
+  font-size: 25px;
+}
+
+.profileShortcut > view {
+  min-width: 0;
+  width: 100%;
+}
+
+.profileShortcutTitle {
+  display: block;
+  overflow: hidden;
+  color: #241b1b;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 950;
+}
+
+.profileShortcutDesc {
+  display: block;
+  overflow: hidden;
+  margin-top: 4px;
+  color: #8f766c;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.profileCouponBanner {
+  display: flex;
+  min-height: 98px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 13px 14px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ffe7ec, #fff5f7);
+  box-shadow: 0 10px 24px rgba(255, 101, 133, 0.12);
+}
+
+.profileCouponBanner > view {
+  flex: 1;
+  min-width: 0;
+}
+
+.profileCouponBanner > view text:first-child {
+  display: block;
+  color: #ff4f67;
+  font-size: 21px;
+  font-weight: 950;
+}
+
+.profileCouponBanner > view text:last-child {
+  display: block;
+  overflow: hidden;
+  margin-top: 6px;
+  color: #ff4f67;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 24px;
+  font-weight: 950;
+}
+
+.profileCouponImage {
+  flex: 0 0 auto;
+  width: 104px;
+  height: 72px;
+  border-radius: 8px;
+}
+
+.profileCouponBanner > text {
+  display: flex;
+  flex: 0 0 auto;
+  width: 70px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #ff4f67;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.profileRecentList,
+.profileAccountPanel {
+  display: grid;
+  gap: 12px;
+}
+
+.profileOrderCard {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+}
+
+.profileOrderImage {
+  flex: 0 0 auto;
+  width: 108px;
+  height: 108px;
+  border-radius: 8px;
+  background: #fff1ea;
+}
+
+.profileOrderBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.profileOrderTop,
+.profileOrderFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.profileOrderTitle {
+  display: block;
+  overflow: hidden;
+  min-width: 0;
+  color: #241b1b;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 23px;
+  font-weight: 950;
+}
+
+.profileOrderStatusText {
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  border-radius: 6px;
+  background: #fff0e7;
+  color: #d94e3f;
+  font-size: 16px;
+  font-weight: 950;
+}
+
+.profileOrderMeta {
+  display: block;
+  overflow: hidden;
+  margin-top: 8px;
+  color: #8f766c;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 19px;
+}
+
+.profileOrderFoot {
+  margin-top: 16px;
+}
+
+.profileOrderFoot text:first-child {
+  color: #ff4f51;
+  font-size: 24px;
+  font-weight: 950;
+}
+
+.profileOrderFoot text:last-child {
+  color: #d94e3f;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.profileAccountPanel {
+  padding: 16px;
+}
+
+.accountInput {
+  height: 66px;
+  padding: 0 14px;
+  border: 1px solid #ffd7c9;
+  border-radius: 8px;
+  background: #fff8f4;
+  color: #241b1b;
+  font-size: 22px;
+}
+
+.profileAccountActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.profileBoundCard {
+  padding: 14px;
+  border-radius: 8px;
+  background: #fff8f4;
+}
+
+.profileBoundName {
+  display: block;
+  color: #241b1b;
+  font-size: 24px;
+  font-weight: 950;
+}
+
+.profileBoundText {
+  display: block;
+  margin-top: 7px;
+  color: #8f766c;
+  font-size: 19px;
+  line-height: 1.35;
+}
+
+/* Reference screen polish */
+.profilePage {
+  padding-top: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 232, 237, 0.95) 0, rgba(255, 247, 244, 0) 260px),
+    #fff7f3;
+}
+
+.profileHeader {
+  overflow: hidden;
+  padding: 14px;
+  border: 0;
+  background:
+    radial-gradient(circle at 88% 17%, rgba(255, 255, 255, 0.35) 0 22px, transparent 23px),
+    radial-gradient(circle at 76% 36%, rgba(255, 255, 255, 0.18) 0 42px, transparent 43px),
+    linear-gradient(135deg, #ff73a9 0%, #ff85b8 58%, #ffadd0 100%);
+  box-shadow: 0 10px 24px rgba(255, 101, 151, 0.18);
+}
+
+.profileHeaderActions {
+  right: 11px;
+  top: 11px;
+  gap: 7px;
+}
+
+.profileHeaderActions text {
+  width: 27px;
+  height: 27px;
+  background: rgba(255, 255, 255, 0.22);
+  color: #342226;
+  font-size: 14px;
+}
+
+.profileHeaderTop {
+  gap: 11px;
+  padding-right: 62px;
+}
+
+.profileAvatar {
+  width: 72px;
+  height: 72px;
+  border: 4px solid rgba(255, 255, 255, 0.75);
+  background: #fff7fb;
+}
+
+.profileName {
+  font-size: 30px;
+  line-height: 1.05;
+}
+
+.profileSub {
+  margin-top: 7px;
+  font-size: 14px;
+}
+
+.profileVipBadge {
+  flex: 0 0 66px;
+  width: 66px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.24);
+  font-size: 13px;
+}
+
+.profileMemberBar {
+  min-height: 66px;
+  margin-top: 13px;
+  padding: 11px;
+  background: #222735;
+  box-shadow: 0 10px 22px rgba(34, 39, 53, 0.18);
+}
+
+.profileMemberBar > view text:first-child {
+  font-size: 19px;
+}
+
+.profileMemberBar > view text:last-child {
+  margin-top: 5px;
+  font-size: 13px;
+}
+
+.profileMemberBar > text {
+  display: flex;
+  width: 82px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffe5a8, #c9964c);
+  color: #34220f;
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.profileBindNotice {
+  margin-top: 11px;
+  padding: 12px;
+  border-color: #ff86a0;
+  background:
+    radial-gradient(circle at 94% 18%, rgba(255, 211, 95, 0.38) 0 30px, transparent 31px),
+    linear-gradient(135deg, #fff0f6, #fff8dd);
+  box-shadow: 0 10px 22px rgba(255, 91, 128, 0.14);
+}
+
+.profileBindTitle {
+  font-size: 19px;
+}
+
+.profileBindText {
+  font-size: 16px;
+}
+
+.profileAddressCard {
+  margin-top: 11px;
+  padding: 12px;
+  background: #fff;
+}
+
+.profileCardLabel {
+  font-size: 15px;
+}
+
+.profileAddress {
+  font-size: 19px;
+}
+
+.profileSmallButton {
+  width: 60px;
+  height: 38px;
+  font-size: 16px;
+  line-height: 38px;
+}
+
+.profileSmallButton text {
+  line-height: 38px;
+}
+
+.profileStats {
+  margin-top: 11px;
+  box-shadow: 0 8px 22px rgba(132, 74, 64, 0.08);
+}
+
+.profileStats > view {
+  min-height: 86px;
+  padding: 11px 6px 9px;
+}
+
+.profileStatLabel {
+  font-size: 13px;
+}
+
+.profileStatValue {
+  margin-top: 6px;
+  font-size: 16px;
+}
+
+.profileStatAction {
+  min-width: 44px;
+  height: 23px;
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+.profileOrderPanel {
+  margin-top: 12px;
+  padding: 12px 10px 10px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(132, 74, 64, 0.08);
+}
+
+.profilePanelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.profilePanelHead text:first-child {
+  color: #241b1b;
+  font-size: 20px;
+  font-weight: 950;
+}
+
+.profilePanelHead text:last-child {
+  color: #8f766c;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.profileOrderStatus {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.profileOrderStatus > view {
+  min-height: 70px;
+  padding: 7px 3px;
+  background: #fff8f7;
+}
+
+.profileStatusIcon {
+  font-size: 21px;
+}
+
+.profileStatusValue {
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+.profileStatusLabel {
+  font-size: 13px;
+}
+
+.profileTraceRow {
+  margin-top: 10px;
+  padding: 11px 8px;
+  background: #fff;
+}
+
+.profileTraceRow > view text:first-child {
+  font-size: 23px;
+}
+
+.profileTraceRow > view text:nth-child(2) {
+  font-size: 13px;
+}
+
+.profileTraceRow > view text:last-child {
+  font-size: 11px;
+}
+
+.profileShortcutGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 12px;
+  padding: 12px 6px 10px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(132, 74, 64, 0.08);
+}
+
+.profileShortcut {
+  position: relative;
+  min-height: 78px;
+  gap: 5px;
+  padding: 6px 4px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.profileShortcutIcon {
+  width: 34px;
+  height: 34px;
+  background: #fff3f5;
+  color: #ff5c79;
+  font-size: 20px;
+}
+
+.profileShortcutBadge {
+  position: absolute;
+  right: 8px;
+  top: 2px;
+  display: flex;
+  min-width: 24px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #ff4f51;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 950;
+  line-height: 16px;
+}
+
+.profileShortcutTitle {
+  font-size: 14px;
+}
+
+.profileShortcutDesc {
+  font-size: 11px;
+}
+
+.profileCouponBanner {
+  min-height: 82px;
+  margin-top: 12px;
+  padding: 12px;
+  background:
+    radial-gradient(circle at 88% 50%, rgba(255, 201, 89, 0.36) 0 34px, transparent 35px),
+    linear-gradient(135deg, #ffe8ef, #fff7e7);
+}
+
+.profileCouponBanner > view text:first-child {
+  color: #ff4f67;
+  font-size: 18px;
+}
+
+.profileCouponBanner > view text:last-child {
+  font-size: 21px;
+}
+
+.profileCouponImage {
+  width: 84px;
+  height: 60px;
+}
+
+.profileCouponBanner > text {
+  width: 62px;
+  height: 34px;
+  font-size: 15px;
+}
+
+/* Final reference-style asset pass */
+.profileHeaderActions view {
+  display: flex;
+  width: 29px;
+  height: 29px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.23);
+}
+
+.profileHeaderActionIcon {
+  width: 21px;
+  height: 21px;
+  filter: drop-shadow(0 3px 4px rgba(58, 28, 34, 0.1));
+}
+
+.profileAvatar {
+  overflow: visible;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.profileAvatarImage {
+  width: 88px;
+  height: 88px;
+  margin: -8px 0 0 -8px;
+  border-radius: 0;
+  filter: drop-shadow(0 8px 12px rgba(128, 38, 67, 0.12));
+}
+
+.profileOrderStatus > view {
+  position: relative;
+}
+
+.profileStatusIcon {
+  display: block;
+  width: 36px;
+  height: 36px;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 5px rgba(92, 55, 43, 0.1));
+}
+
+.profileStatusValue {
+  position: absolute;
+  right: 8px;
+  top: 3px;
+  display: flex;
+  min-width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: #ff4f67;
+  color: #fff;
+  font-size: 10px;
+  line-height: 18px;
+}
+
+.profileTraceIcon {
+  display: block;
+  width: 31px;
+  height: 31px;
+  margin: 0 auto;
+  filter: drop-shadow(0 3px 4px rgba(92, 55, 43, 0.09));
+}
+
+.profileShortcut > .profileShortcutIcon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  flex: 0 0 auto;
+  background: #fff7f9;
+  box-shadow: inset 0 -5px 9px rgba(255, 235, 242, 0.72);
+}
+
+.profileShortcutImage {
+  width: 36px;
+  height: 36px;
+  filter: drop-shadow(0 4px 5px rgba(92, 55, 43, 0.1));
+}
+
+.profileCouponImage {
+  width: 92px;
+  height: 66px;
+  border-radius: 0;
+  filter: drop-shadow(0 7px 10px rgba(202, 62, 88, 0.14));
+}

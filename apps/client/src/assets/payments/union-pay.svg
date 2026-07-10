@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" role="img" aria-label="UnionPay">
+  <rect width="96" height="96" rx="24" fill="#f6f8fb"/>
+  <rect x="18" y="24" width="24" height="48" rx="6" fill="#d4212a"/>
+  <rect x="36" y="24" width="24" height="48" rx="6" fill="#005bac"/>
+  <rect x="54" y="24" width="24" height="48" rx="6" fill="#00965e"/>
+  <path d="M31 39h34v7H31v-7Zm0 12h26v7H31v-7Z" fill="#fff"/>
+</svg>

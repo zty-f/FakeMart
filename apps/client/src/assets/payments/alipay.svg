@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" role="img" aria-label="Alipay">
+  <rect width="96" height="96" rx="24" fill="#1677ff"/>
+  <path d="M24 25h48v14H53v8h17v11H53v13H42V58H25V47h17v-8H24V25Z" fill="#fff"/>
+  <path d="M25 70c16-4 29-11 39-22l7 8C60 68 46 75 29 79l-4-9Z" fill="#d7ebff"/>
+</svg>

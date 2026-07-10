@@ -1,0 +1,729 @@
+html,
+body,
+#app,
+.taro_router,
+.taro_page {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+page {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  min-height: 100%;
+  background: #fff7f3;
+  color: #292323;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #fff7f3;
+}
+
+view,
+text,
+button,
+input,
+textarea,
+image,
+taro-view-core,
+taro-text-core,
+taro-button-core,
+taro-input-core,
+taro-textarea-core,
+taro-image-core,
+taro-scroll-view-core {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+button {
+  margin: 0;
+  border-radius: 8px;
+}
+
+button::after {
+  border: 0;
+}
+
+.page {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+  max-width: 100vw;
+  margin: 0 auto;
+  padding: 18px 14px 168px;
+  background:
+    linear-gradient(180deg, rgba(255, 235, 229, 0.82) 0, rgba(255, 247, 244, 0) 260px),
+    #fff7f3;
+}
+
+.section {
+  margin-top: 16px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.sectionTitle {
+  display: block;
+  color: #241b1b;
+  font-size: 27px;
+  font-weight: 950;
+  letter-spacing: 0;
+  line-height: 1.15;
+}
+
+.muted {
+  flex: 0 0 auto;
+  color: #9d7c72;
+  font-size: 17px;
+  font-weight: 850;
+}
+
+.hero,
+.homeHero,
+.foodHero,
+.ordersHero,
+.profileHeader,
+.paymentHero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  color: #fff;
+  background: linear-gradient(135deg, #ff6b5f 0%, #ff8d66 58%, #ffbc6b 100%);
+  box-shadow: 0 14px 30px rgba(255, 91, 80, 0.2);
+}
+
+.hero text,
+.homeHero text,
+.foodHero text,
+.ordersHero text,
+.profileHeader text,
+.paymentHero text {
+  color: inherit;
+}
+
+.heroTitle {
+  display: block;
+  font-size: 39px;
+  font-weight: 950;
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+
+.heroText {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 22px;
+  line-height: 1.45;
+}
+
+.searchBox,
+.foodSearch,
+.ordersSearch {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid rgba(255, 218, 202, 0.96);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 10px 24px rgba(134, 63, 42, 0.08);
+}
+
+.searchBox input,
+.foodSearch input,
+.ordersSearch input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  color: #2a2220;
+  font-weight: 850;
+}
+
+.searchButton,
+.primaryButton,
+.addButton,
+.dealAdd,
+.storeProductAdd,
+.foodMiniButton.primary,
+.orderActionButton.primary {
+  background: linear-gradient(135deg, #ff5b5c 0%, #ff7f4f 100%);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(255, 91, 80, 0.22);
+}
+
+.secondaryButton,
+.foodMiniButton.secondary,
+.orderActionButton.secondary,
+.profileSmallButton {
+  border: 1px solid #ffd7c9;
+  background: #fff8f4;
+  color: #d94e3f;
+}
+
+.primaryButton,
+.secondaryButton,
+.dangerButton {
+  display: flex;
+  height: 72px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 25px;
+  font-weight: 950;
+}
+
+.primaryButton text,
+.secondaryButton text,
+.dangerButton text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 72px;
+}
+
+.dangerButton {
+  background: #2ebf9b;
+  color: #fff;
+}
+
+.primaryButton.disabled,
+.secondaryButton.disabled,
+.dangerButton.disabled {
+  opacity: 0.52;
+}
+
+.panel,
+.quickCard,
+.metric,
+.categoryItem,
+.homeCategoryPanel,
+.homePromoTile,
+.homeStoreCard,
+.foodStoreCard,
+.profileAddressCard,
+.profileOrderStatus,
+.profileShortcut,
+.profileOrderCard,
+.profileAccountPanel,
+.orderCard,
+.cashierPanel,
+.payStatusCard,
+.paymentMethod,
+.cartAddressPanel,
+.categoryTopBar,
+.detailCard {
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(132, 74, 64, 0.08);
+}
+
+.productList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.productGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.productGrid .productCard {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.productCard {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(143, 70, 44, 0.08);
+}
+
+.productCard.horizontal,
+.productCard.compact {
+  display: flex;
+  min-height: 176px;
+}
+
+.productMedia {
+  position: relative;
+  overflow: hidden;
+  background: #fff1ea;
+}
+
+.productCard.grid .productMedia {
+  width: 100%;
+}
+
+.productCard.horizontal .productMedia,
+.productCard.compact .productMedia {
+  flex: 0 0 168px;
+  width: 168px;
+}
+
+.productImage {
+  display: block;
+  width: 100%;
+  height: 246px;
+  background: #fff1ea;
+}
+
+.productCard.horizontal .productImage,
+.productCard.compact .productImage {
+  width: 168px;
+  height: 176px;
+}
+
+.safeImageFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(255, 116, 98, 0.14), rgba(255, 207, 120, 0.18)),
+    #fff5ed;
+  text-align: center;
+}
+
+.safeImageFallback text {
+  display: -webkit-box;
+  overflow: hidden;
+  max-width: 82%;
+  color: #8a5b4b;
+  font-size: 20px;
+  font-weight: 950;
+  line-height: 1.2;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.homeTopActionIcon,
+.homeCategoryIconImage,
+.foodTopOrderIcon,
+.foodChannelImage,
+.categoryHeroImage,
+.categoryPillIcon,
+.categoryEmptyIcon,
+.profileHeaderActionIcon,
+.profileStatusIcon,
+.profileTraceIcon,
+.profileShortcutImage,
+.savingsHeroImage,
+.savingsMetricIcon,
+.bottomNavImage {
+  object-fit: contain;
+}
+
+.homeTopActionIcon img,
+.homeCategoryIconImage img,
+.foodTopOrderIcon img,
+.foodChannelImage img,
+.categoryHeroImage img,
+.categoryPillIcon img,
+.categoryEmptyIcon img,
+.profileHeaderActionIcon img,
+.profileStatusIcon img,
+.profileTraceIcon img,
+.profileShortcutImage img,
+.savingsHeroImage img,
+.savingsMetricIcon img,
+.bottomNavImage img {
+  position: static;
+  left: auto;
+  top: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+}
+
+.productBadge {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  padding: 5px 8px;
+  border-radius: 7px;
+  background: rgba(255, 91, 80, 0.92);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.productBody {
+  flex: 1;
+  min-width: 0;
+  padding: 13px 13px 15px;
+}
+
+.productTitle {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #241b1b;
+  font-size: 25px;
+  font-weight: 950;
+  line-height: 1.28;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.productSubtitle {
+  display: -webkit-box;
+  overflow: hidden;
+  min-height: 50px;
+  margin-top: 7px;
+  color: #8f766c;
+  font-size: 20px;
+  line-height: 1.3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.productTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 9px;
+}
+
+.productTags text {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #fff0e7;
+  color: #d94e3f;
+  font-size: 17px;
+  font-weight: 850;
+}
+
+.saveLine {
+  display: block;
+  margin-top: 9px;
+  color: #2c9e79;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.productFoot {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  margin-top: 8px;
+  padding-right: 62px;
+}
+
+.price {
+  color: #ff4f51;
+  font-size: 31px;
+  font-weight: 950;
+}
+
+.compare {
+  color: #b9a6a0;
+  font-size: 18px;
+  text-decoration: line-through;
+}
+
+.addButton {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  width: 54px;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 28px;
+  font-weight: 950;
+  line-height: 46px;
+}
+
+.addButton text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 46px;
+}
+
+.empty {
+  padding: 44px 20px;
+  border: 1px dashed #ffc7b5;
+  border-radius: 8px;
+  background: #fffdfa;
+  color: #9a7669;
+  text-align: center;
+  font-size: 24px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.taro-tabbar__tabbar,
+.taro-tabbar__item,
+.weui-tabbar {
+  display: none !important;
+}
+
+.bottomNav {
+  position: fixed;
+  left: 50vw;
+  bottom: calc(10px + env(safe-area-inset-bottom));
+  z-index: 40;
+  display: flex;
+  width: calc(100vw - 24px);
+  max-width: 500px;
+  height: 66px;
+  align-items: center;
+  gap: 4px;
+  padding: 5px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(255, 218, 210, 0.95);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 12px 28px rgba(112, 66, 60, 0.16);
+  backdrop-filter: blur(16px);
+}
+
+.bottomNavItem {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex-direction: column;
+  padding: 4px 0;
+  border-radius: 8px;
+  color: #998982;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.bottomNavItem.active {
+  background: #fff2ee;
+  color: #ff5b5c;
+}
+
+.bottomNavItem-food.active {
+  background: #fff6dc;
+  color: #e0a400;
+}
+
+.bottomNavItem-cart.active {
+  background: #fff0f4;
+  color: #ff6585;
+}
+
+.bottomNavItem-profile.active {
+  background: #ffeef3;
+  color: #ff6585;
+}
+
+.bottomNavIconWrap {
+  display: flex;
+  width: 31px;
+  height: 31px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  color: inherit;
+  flex: 0 0 auto;
+}
+
+.bottomNavItem.active .bottomNavIconWrap {
+  background: linear-gradient(135deg, #ff5b5c, #ff8a5b);
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(255, 91, 80, 0.22);
+}
+
+.bottomNavItem-food.active .bottomNavIconWrap {
+  background: linear-gradient(135deg, #ffd225, #ffb300);
+  box-shadow: 0 8px 16px rgba(255, 196, 0, 0.24);
+}
+
+.bottomNavItem-cart.active .bottomNavIconWrap,
+.bottomNavItem-profile.active .bottomNavIconWrap {
+  background: linear-gradient(135deg, #ff6585, #ff8fb1);
+  box-shadow: 0 8px 16px rgba(255, 101, 133, 0.22);
+}
+
+.bottomNavImage {
+  display: block;
+  width: 23px;
+  height: 23px;
+  filter: drop-shadow(0 3px 5px rgba(80, 52, 44, 0.12));
+}
+
+.bottomNavItem.active .bottomNavImage {
+  transform: translateY(-1px) scale(1.04);
+}
+
+.bottomNavIcon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  color: currentColor;
+  flex: 0 0 auto;
+}
+
+.bottomNavIconMark,
+.bottomNavIconMark::before,
+.bottomNavIconMark::after {
+  position: absolute;
+  display: block;
+  content: "";
+  box-sizing: border-box;
+}
+
+.bottomNavIcon-home .bottomNavIconMark {
+  left: 6px;
+  top: 11px;
+  width: 16px;
+  height: 13px;
+  border: 3px solid currentColor;
+  border-top: 0;
+  border-radius: 2px;
+}
+
+.bottomNavIcon-home .bottomNavIconMark::before {
+  left: -1px;
+  top: -9px;
+  width: 13px;
+  height: 13px;
+  border-left: 3px solid currentColor;
+  border-top: 3px solid currentColor;
+  border-radius: 2px 0 0 0;
+  transform: rotate(45deg);
+}
+
+.bottomNavIcon-food .bottomNavIconMark {
+  left: 3px;
+  top: 3px;
+  width: 22px;
+  height: 22px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+}
+
+.bottomNavIcon-food .bottomNavIconMark::before,
+.bottomNavIcon-food .bottomNavIconMark::after {
+  top: 4px;
+  width: 3px;
+  height: 10px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.bottomNavIcon-food .bottomNavIconMark::before {
+  left: 6px;
+}
+
+.bottomNavIcon-food .bottomNavIconMark::after {
+  right: 6px;
+}
+
+.bottomNavIcon-cart .bottomNavIconMark {
+  left: 4px;
+  top: 8px;
+  width: 21px;
+  height: 13px;
+  border: 3px solid currentColor;
+  border-top: 0;
+  border-radius: 2px 2px 5px 5px;
+}
+
+.bottomNavIcon-cart .bottomNavIconMark::before {
+  left: 2px;
+  top: -8px;
+  width: 12px;
+  height: 8px;
+  border-left: 3px solid currentColor;
+  border-top: 3px solid currentColor;
+  transform: skewX(-18deg);
+}
+
+.bottomNavIcon-cart .bottomNavIconMark::after {
+  left: 2px;
+  bottom: -7px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 13px 0 0 currentColor;
+}
+
+.bottomNavIcon-profile .bottomNavIconMark {
+  left: 9px;
+  top: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.bottomNavIcon-profile .bottomNavIconMark::after {
+  left: -7px;
+  top: 14px;
+  width: 24px;
+  height: 12px;
+  border: 3px solid currentColor;
+  border-bottom: 0;
+  border-radius: 15px 15px 0 0;
+}
+
+.bottomNavLabel {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.dealScroll,
+.nearbyStoreScroll,
+.foodChannels,
+.foodFilterChips,
+.foodStoreSortRow,
+.ordersFilterRow {
+  max-width: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.dealScroll::-webkit-scrollbar,
+.nearbyStoreScroll::-webkit-scrollbar,
+.foodChannels::-webkit-scrollbar,
+.foodFilterChips::-webkit-scrollbar,
+.foodStoreSortRow::-webkit-scrollbar,
+.ordersFilterRow::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}

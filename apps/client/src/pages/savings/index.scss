@@ -1,0 +1,414 @@
+.savingsPage {
+  padding-top: 14px;
+  padding-bottom: 176px;
+  background:
+    linear-gradient(180deg, rgba(255, 232, 237, 0.95) 0, rgba(255, 247, 244, 0) 260px),
+    #fff7f3;
+}
+
+.savingsTopBar,
+.savingsHero,
+.savingsMetricGrid,
+.savingsPeriodPanel,
+.savingsTrendPanel,
+.savingsBreakdownPanel,
+.savingsActionStrip {
+  max-width: 100%;
+}
+
+.savingsTopBar {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 8px 20px rgba(132, 74, 64, 0.08);
+}
+
+.savingsTopBar text:first-child,
+.savingsTopBar text:last-child {
+  flex: 0 0 auto;
+  color: #ff4f51;
+  font-size: 15px;
+  font-weight: 950;
+}
+
+.savingsTopBar text:nth-child(2) {
+  overflow: hidden;
+  color: #241b1b;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: 950;
+}
+
+.savingsHero {
+  position: relative;
+  display: flex;
+  min-height: 186px;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  margin-top: 12px;
+  padding: 18px 14px;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 82% 20%, rgba(255, 255, 255, 0.3) 0 44px, transparent 45px),
+    linear-gradient(135deg, #ff6f9e 0%, #ff7f72 54%, #ffbf63 100%);
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(255, 101, 133, 0.18);
+}
+
+.savingsHero::after {
+  position: absolute;
+  right: -30px;
+  bottom: -42px;
+  width: 142px;
+  height: 106px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.16);
+  content: "";
+  transform: rotate(-13deg);
+}
+
+.savingsHeroCopy {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+}
+
+.savingsHeroLabel {
+  display: inline-flex;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 950;
+}
+
+.savingsHeroAmount {
+  display: block;
+  overflow: hidden;
+  margin-top: 10px;
+  color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 42px;
+  font-weight: 950;
+  line-height: 1.05;
+}
+
+.savingsHeroText {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-top: 9px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  font-weight: 850;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.savingsHeroImage {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 112px;
+  height: 112px;
+  filter: drop-shadow(0 12px 15px rgba(134, 50, 70, 0.18));
+}
+
+.savingsMetricGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.savingsMetric {
+  min-width: 0;
+  min-height: 104px;
+  padding: 12px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(132, 74, 64, 0.08);
+}
+
+.savingsMetricIcon {
+  display: block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 4px 5px rgba(92, 55, 43, 0.1));
+}
+
+.savingsMetric text:nth-child(2) {
+  display: block;
+  color: #8f766c;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.savingsMetric text:last-child {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: #ff4f51;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 21px;
+  font-weight: 950;
+}
+
+.savingsPeriodPanel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  overflow: hidden;
+  margin-top: 12px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(132, 74, 64, 0.08);
+}
+
+.savingsPeriodPanel > view {
+  min-width: 0;
+  min-height: 78px;
+  padding: 12px 8px;
+  border-right: 1px solid #ffe5da;
+  text-align: center;
+}
+
+.savingsPeriodPanel > view:last-child {
+  border-right: 0;
+}
+
+.savingsPeriodPanel text:first-child {
+  display: block;
+  color: #a07363;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.savingsPeriodPanel text:last-child {
+  display: block;
+  overflow: hidden;
+  margin-top: 7px;
+  color: #241b1b;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.savingsTrendPanel,
+.savingsBreakdownPanel {
+  padding: 14px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(132, 74, 64, 0.08);
+}
+
+.savingsPanelHead {
+  margin-bottom: 12px;
+}
+
+.savingsTrendBars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  min-height: 130px;
+  padding: 10px 2px 0;
+}
+
+.savingsTrendItem {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: center;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.savingsTrendTrack {
+  display: flex;
+  width: 100%;
+  max-width: 22px;
+  height: 98px;
+  align-items: flex-end;
+  justify-content: center;
+  border-radius: 999px;
+  background: #fff2ee;
+}
+
+.savingsTrendBar {
+  width: 100%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ff6f9e, #ffbf63);
+  box-shadow: 0 6px 12px rgba(255, 101, 133, 0.16);
+}
+
+.savingsTrendItem text {
+  color: #a07363;
+  font-size: 10px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.savingsBreakdownList {
+  display: grid;
+  gap: 10px;
+}
+
+.savingsEmptyState {
+  display: flex;
+  min-height: 126px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: 1px dashed rgba(255, 151, 119, 0.68);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, #fff, #fff4df),
+    #fff;
+}
+
+.savingsEmptyState.compact {
+  min-height: 96px;
+}
+
+.savingsEmptyBadge {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff5b5c, #ffbf63);
+  color: #fff;
+  box-shadow: 0 10px 18px rgba(255, 91, 80, 0.16);
+}
+
+.savingsEmptyBadge text {
+  color: inherit;
+  font-size: 17px;
+  font-weight: 950;
+}
+
+.savingsEmptyState > view:last-child {
+  min-width: 0;
+}
+
+.savingsEmptyState > view:last-child text:first-child {
+  display: block;
+  color: #241b1b;
+  font-size: 20px;
+  font-weight: 950;
+}
+
+.savingsEmptyState > view:last-child text:last-child {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-top: 6px;
+  color: #8f766c;
+  font-size: 15px;
+  font-weight: 850;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.savingsBreakdownRow {
+  padding: 12px;
+  border-radius: 8px;
+  background: #fff8f4;
+}
+
+.savingsBreakdownTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.savingsBreakdownTop text:first-child {
+  overflow: hidden;
+  color: #241b1b;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.savingsBreakdownTop text:last-child {
+  flex: 0 0 auto;
+  color: #ff4f51;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.savingsBreakdownTrack {
+  overflow: hidden;
+  height: 10px;
+  margin-top: 10px;
+  border-radius: 999px;
+  background: #ffe8df;
+}
+
+.savingsBreakdownBar {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff5b5c, #ffbf63);
+}
+
+.savingsActionStrip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.savingsActionStrip > view {
+  min-height: 84px;
+  padding: 13px;
+  border: 1px solid rgba(255, 220, 203, 0.92);
+  border-radius: 8px;
+  background: linear-gradient(135deg, #fff, #fff0f4);
+  box-shadow: 0 8px 22px rgba(132, 74, 64, 0.08);
+}
+
+.savingsActionStrip > view:last-child {
+  background: linear-gradient(135deg, #fff, #fff7dc);
+}
+
+.savingsActionStrip text:first-child {
+  display: block;
+  color: #241b1b;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.savingsActionStrip text:last-child {
+  display: block;
+  overflow: hidden;
+  margin-top: 7px;
+  color: #8f766c;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 850;
+}

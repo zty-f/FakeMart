@@ -1,0 +1,11 @@
+.git
+.DS_Store
+node_modules
+**/node_modules
+**/dist
+**/.swc
+**/tsconfig.tsbuildinfo
+.env
+.env.*
+design-qa.md
+docs
