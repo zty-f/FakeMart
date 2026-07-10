@@ -1,5 +1,5 @@
 import { Image, Text, View } from '@tarojs/components'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type ImageMode = 'scaleToFill' | 'aspectFit' | 'aspectFill' | 'widthFix' | 'heightFix'
 
@@ -12,17 +12,9 @@ interface Props {
 
 export function SafeImage({ className, src, mode = 'aspectFill', label = '精选' }: Props) {
   const [failed, setFailed] = useState(!src)
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current)
     setFailed(!src)
-    if (src) {
-      timeoutRef.current = setTimeout(() => setFailed(true), 3500)
-    }
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    }
   }, [src])
 
   if (failed) {
@@ -39,9 +31,7 @@ export function SafeImage({ className, src, mode = 'aspectFill', label = '精选
       mode={mode}
       src={src || ''}
       onError={() => setFailed(true)}
-      onLoad={() => {
-        if (timeoutRef.current) clearTimeout(timeoutRef.current)
-      }}
+      onLoad={() => setFailed(false)}
     />
   )
 }

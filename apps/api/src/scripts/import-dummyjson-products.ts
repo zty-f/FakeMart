@@ -25,6 +25,7 @@ const categoryMap: Record<string, string> = {
   furniture: 'cat-home',
   'home-decoration': 'cat-home',
   kitchen: 'cat-home',
+  'kitchen-accessories': 'cat-home',
   groceries: 'cat-food',
   beauty: 'cat-beauty',
   fragrances: 'cat-beauty',
@@ -36,7 +37,16 @@ const categoryMap: Record<string, string> = {
   'womens-shoes': 'cat-fashion',
   tops: 'cat-fashion',
   sunglasses: 'cat-fashion',
-  'sports-accessories': 'cat-sport'
+  'sports-accessories': 'cat-sport',
+  'mens-watches': 'cat-fashion',
+  'womens-watches': 'cat-fashion',
+  'pet-supplies': 'cat-pet',
+  'baby-products': 'cat-mother-baby',
+  stationery: 'cat-office',
+  'office-supplies': 'cat-office',
+  supplements: 'cat-health',
+  luggage: 'cat-travel',
+  'travel-accessories': 'cat-travel'
 }
 
 function priceToCents(price: number): number {
