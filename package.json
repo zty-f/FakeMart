@@ -13,7 +13,9 @@
     "lint": "pnpm -r lint",
     "db:init": "pnpm --filter @fakemart/api db:init",
     "db:seed": "pnpm --filter @fakemart/api db:seed",
-    "data:import:dummyjson": "pnpm --filter @fakemart/api data:import:dummyjson"
+    "data:import:dummyjson": "pnpm --filter @fakemart/api data:import:dummyjson",
+    "video:dev": "pnpm --filter @fakemart/video dev",
+    "video:render": "pnpm --filter @fakemart/video render"
   },
   "engines": {
     "node": ">=22.0.0",
