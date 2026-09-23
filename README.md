@@ -19,7 +19,7 @@ docker compose up -d mysql redis
 如果使用本机 MySQL，可以直接创建 `.env`，例如：
 
 ```bash
-DATABASE_URL="mysql://root:zty123456@127.0.0.1:3306/fakemart"
+DATABASE_URL="mysql://root:<your-local-mysql-password>@127.0.0.1:3306/fakemart"
 API_PORT=4000
 API_HOST=0.0.0.0
 CORS_ORIGIN="http://localhost:5173,http://localhost:10086"

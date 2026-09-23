@@ -1,6 +1,7 @@
 /// <reference types="@tarojs/taro" />
 
 declare module '*.png';
+declare module '*.webp';
 declare module '*.gif';
 declare module '*.jpg';
 declare module '*.jpeg';
@@ -25,5 +26,4 @@ declare namespace NodeJS {
     TARO_APP_ID: string
   }
 }
-
 

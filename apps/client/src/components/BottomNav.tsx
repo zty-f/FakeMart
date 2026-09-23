@@ -1,10 +1,10 @@
 import { Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { SafeImage } from './SafeImage'
-import houseIcon from '../assets/ui/fluent/house.png'
-import plateIcon from '../assets/ui/fluent/plate.png'
-import heartIcon from '../assets/ui/fluent/heart.png'
-import personIcon from '../assets/ui/fluent/person.png'
+import houseIcon from '../assets/ui/fluent/house.webp'
+import plateIcon from '../assets/ui/fluent/plate.webp'
+import heartIcon from '../assets/ui/fluent/heart.webp'
+import personIcon from '../assets/ui/fluent/person.webp'
 
 type NavKey = 'home' | 'food' | 'cart' | 'profile'
 

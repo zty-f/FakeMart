@@ -11,5 +11,8 @@ export const config = {
     .split(',')
     .map((item) => item.trim())
     .filter(Boolean),
-  jwtSecret: process.env.JWT_SECRET ?? 'dev-only-fakemart-secret'
+  jwtSecret: process.env.JWT_SECRET ?? 'dev-only-fakemart-secret',
+  wechatAppId: process.env.WECHAT_APP_ID ?? '',
+  wechatAppSecret: process.env.WECHAT_APP_SECRET ?? '',
+  wechatAuthRequired: process.env.WECHAT_AUTH_REQUIRED === 'true' || process.env.NODE_ENV === 'production'
 }

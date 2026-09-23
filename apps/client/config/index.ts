@@ -25,10 +25,11 @@ export default defineConfig<'vite'>(async (merge) => {
       "@tarojs/plugin-generator"
     ],
     defineConstants: {
+      FAKEMART_API_BASE: JSON.stringify(process.env.FAKEMART_API_BASE ?? '')
     },
     copy: {
       patterns: [
-        { from: path.join(projectRoot, 'src/static'), to: path.join(projectRoot, 'dist/static') }
+        { from: path.join(projectRoot, 'src/static/share-cover.jpg'), to: path.join(projectRoot, 'dist/static/share-cover.jpg') }
       ],
       options: {
       }

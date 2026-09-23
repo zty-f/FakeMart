@@ -1,6 +1,8 @@
 import Taro from '@tarojs/taro'
 import { syncDefaultAddress } from './address'
 
+declare const FAKEMART_API_BASE: string
+
 function inferApiBase(): string {
   if (typeof window !== 'undefined' && window.location) {
     const { hostname, origin } = window.location
@@ -13,7 +15,7 @@ function inferApiBase(): string {
   return 'http://localhost:4000'
 }
 
-const API_BASE = process.env.TARO_APP_API_BASE || inferApiBase()
+const API_BASE = FAKEMART_API_BASE || inferApiBase()
 const TOKEN_KEY = 'fakemart_user_token'
 const SESSION_KEY = 'fakemart_session_id'
 
@@ -68,7 +70,8 @@ export async function ensureAuth(): Promise<void> {
   }
   const result = await request<{ token: string; user?: { defaultAddressLabel?: string | null } }>('/auth/wechat', 'POST', {
     code,
-    nickname: '假装购用户'
+    nickname: '假装购用户',
+    platform: Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? 'wechat_mp' : 'h5'
   })
   setToken(result.token)
   syncDefaultAddress(result.user?.defaultAddressLabel)
@@ -82,7 +85,7 @@ export async function track(eventName: string, properties: Record<string, unknow
         {
           eventName,
           sessionId: sessionId(),
-          platform: process.env.TARO_ENV === 'weapp' ? 'wechat_mp' : 'h5',
+          platform: Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? 'wechat_mp' : 'h5',
           pagePath,
           occurredAt: new Date().toISOString(),
           appVersion: '0.1.0',

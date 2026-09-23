@@ -676,8 +676,39 @@ const loginSchema = z.object({
 const wechatSchema = z.object({
   code: z.string().optional(),
   nickname: z.string().optional(),
-  avatarUrl: z.string().optional()
+  avatarUrl: z.string().optional(),
+  platform: z.enum(['wechat_mp', 'h5']).default('wechat_mp')
 })
+
+type WechatCode2SessionResponse = {
+  openid?: string
+  unionid?: string
+  errcode?: number
+  errmsg?: string
+}
+
+async function resolveWechatOpenId(code: string): Promise<string> {
+  if (!config.wechatAppId || !config.wechatAppSecret) {
+    throw new Error('WECHAT_APP_ID and WECHAT_APP_SECRET are not configured')
+  }
+
+  const query = new URLSearchParams({
+    appid: config.wechatAppId,
+    secret: config.wechatAppSecret,
+    js_code: code,
+    grant_type: 'authorization_code'
+  })
+  const response = await fetch(`https://api.weixin.qq.com/sns/jscode2session?${query.toString()}`)
+  if (!response.ok) {
+    throw new Error(`WeChat code2Session HTTP ${response.status}`)
+  }
+
+  const result = await response.json() as WechatCode2SessionResponse
+  if (!result.openid) {
+    throw new Error(`WeChat code2Session ${result.errcode ?? 'unknown'}: ${result.errmsg ?? 'missing openid'}`)
+  }
+  return result.openid
+}
 
 app.get('/health', async () => ({ ok: true, name: '假装购 FakeMart API' }))
 
@@ -777,9 +808,23 @@ app.post('/auth/bind', async (request, reply) => {
   }
 })
 
-app.post('/auth/wechat', async (request) => {
+app.post('/auth/wechat', async (request, reply) => {
   const body = wechatSchema.parse(request.body)
-  const openid = body.code ? `mock_${body.code}` : `mock_${nanoid(12)}`
+  let openid: string
+  if (body.platform === 'h5') {
+    openid = body.code ? `h5_${body.code}` : `h5_${nanoid(12)}`
+  } else {
+    if (!body.code) return reply.code(400).send({ message: '微信登录 code 缺失' })
+    try {
+      openid = await resolveWechatOpenId(body.code)
+    } catch (error) {
+      app.log.error({ error: error instanceof Error ? error.message : String(error) }, 'WeChat code2Session failed')
+      if (config.wechatAuthRequired) {
+        return reply.code(401).send({ message: '微信登录失败，请稍后重试' })
+      }
+      openid = `mock_${body.code}`
+    }
+  }
   const existing = await row(
     `SELECT aa.id auth_id, aa.user_id, u.id, u.username, u.display_name, u.avatar_url, u.default_address_label, u.created_at, u.last_active_at
      FROM auth_accounts aa JOIN users u ON u.id = aa.user_id
