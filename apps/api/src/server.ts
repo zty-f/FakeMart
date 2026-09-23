@@ -141,7 +141,8 @@ function publicUser(user: AnyRow) {
     avatarUrl: user.avatar_url,
     defaultAddressLabel: normalizeAddressLabel(user.default_address_label),
     createdAt: user.created_at ? iso(user.created_at) : null,
-    lastActiveAt: user.last_active_at ? nullableIso(user.last_active_at) : null
+    lastActiveAt: user.last_active_at ? nullableIso(user.last_active_at) : null,
+    wechatLinked: Boolean(user.wechat_linked)
   }
 }
 
@@ -808,6 +809,104 @@ app.post('/auth/bind', async (request, reply) => {
   }
 })
 
+const linkWechatSchema = z.object({
+  code: z.string().optional(),
+  username: z.string().min(1).max(64).optional(),
+  password: z.string().min(1).max(128).optional()
+})
+
+app.post('/auth/link-wechat', async (request, reply) => {
+  const payload = await tokenPayload(request)
+  if (payload?.role !== 'user') return reply.code(401).send({ message: '请先登录' })
+
+  const body = linkWechatSchema.parse(request.body)
+  if ((body.username && !body.password) || (!body.username && body.password)) {
+    return reply.code(400).send({ message: '请输入完整的账号密码' })
+  }
+
+  const currentUser = await row(
+    'SELECT id, username, display_name, avatar_url, default_address_label, created_at, last_active_at FROM users WHERE id = ?',
+    [payload.sub]
+  )
+  if (!currentUser) return reply.code(404).send({ message: '当前用户不存在' })
+
+  const currentWechat = await row(
+    `SELECT id, provider_user_id, user_id FROM auth_accounts WHERE user_id = ? AND provider = 'wechat_mp' AND status = 'active'`,
+    [payload.sub]
+  )
+
+  let targetUserId = payload.sub
+  if (body.username && body.password) {
+    const account = await row(
+      `SELECT aa.id auth_id, aa.user_id, aa.password_hash, u.id, u.username, u.display_name, u.avatar_url, u.default_address_label, u.created_at, u.last_active_at
+       FROM auth_accounts aa JOIN users u ON u.id = aa.user_id
+       WHERE aa.provider = 'username_password' AND aa.provider_user_id = ? AND aa.status = 'active'`,
+      [body.username]
+    )
+    if (!account || !account.password_hash || !(await bcrypt.compare(body.password, account.password_hash))) {
+      return reply.code(401).send({ message: '用户名或密码错误' })
+    }
+    targetUserId = account.user_id
+    if (!currentWechat) return reply.code(409).send({ message: '当前登录态不是微信账号，请重新微信登录' })
+    if (targetUserId !== payload.sub) {
+      const targetWechat = await row(
+        `SELECT id FROM auth_accounts WHERE user_id = ? AND provider = 'wechat_mp' AND status = 'active'`,
+        [targetUserId]
+      )
+      if (targetWechat) return reply.code(409).send({ message: '该账号已绑定其他微信' })
+    }
+  } else if (!body.code && !currentWechat) {
+    return reply.code(400).send({ message: '请提供微信登录 code' })
+  }
+
+  if (body.code) {
+    let openid: string
+    try {
+      openid = await resolveWechatOpenId(body.code)
+    } catch (error) {
+      app.log.error({ error: error instanceof Error ? error.message : String(error) }, 'WeChat link code2Session failed')
+      return reply.code(401).send({ message: '微信登录失败，请稍后重试' })
+    }
+    const existingWechat = await row(
+      `SELECT id, user_id FROM auth_accounts WHERE provider = 'wechat_mp' AND provider_user_id = ? AND status = 'active'`,
+      [openid]
+    )
+    if (existingWechat && existingWechat.user_id !== targetUserId) {
+      return reply.code(409).send({ message: '该微信已绑定其他账号' })
+    }
+    if (existingWechat && existingWechat.user_id === targetUserId) {
+      targetUserId = existingWechat.user_id
+    } else {
+      await withTransaction(async (connection) => {
+        await connection.execute(
+          `INSERT INTO auth_accounts (id, user_id, provider, provider_user_id, bound_at, last_login_at, status)
+           VALUES (?, ?, 'wechat_mp', ?, NOW(), NOW(), 'active')`,
+          [`auth_${nanoid(12)}`, targetUserId, openid]
+        )
+      })
+    }
+  } else if (currentWechat && currentWechat.user_id !== targetUserId) {
+    await withTransaction(async (connection) => {
+      await connection.execute(
+        `UPDATE auth_accounts SET user_id = ?, last_login_at = NOW() WHERE id = ? AND user_id = ?`,
+        [targetUserId, currentWechat.id, payload.sub]
+      )
+      await connection.execute('UPDATE users SET last_active_at = NOW() WHERE id IN (?, ?)', [targetUserId, payload.sub])
+    })
+  }
+
+  const linkedUser = await row(
+    `SELECT u.id, u.username, u.display_name, u.avatar_url, u.default_address_label, u.created_at, u.last_active_at,
+            EXISTS (SELECT 1 FROM auth_accounts wa WHERE wa.user_id = u.id AND wa.provider = 'wechat_mp' AND wa.status = 'active') AS wechat_linked
+     FROM users u WHERE u.id = ?`,
+    [targetUserId]
+  )
+  return {
+    token: await signUser(targetUserId, linkedUser?.username),
+    user: publicUser(linkedUser ?? currentUser)
+  }
+})
+
 app.post('/auth/wechat', async (request, reply) => {
   const body = wechatSchema.parse(request.body)
   let openid: string
@@ -869,7 +968,12 @@ app.post('/auth/wechat', async (request, reply) => {
 
 app.get('/auth/me', async (request) => {
   const userId = await userIdFromRequest(request)
-  const user = await row('SELECT id, username, display_name, avatar_url, default_address_label, created_at, last_active_at FROM users WHERE id = ?', [userId])
+  const user = await row(
+    `SELECT u.id, u.username, u.display_name, u.avatar_url, u.default_address_label, u.created_at, u.last_active_at,
+            EXISTS (SELECT 1 FROM auth_accounts wa WHERE wa.user_id = u.id AND wa.provider = 'wechat_mp' AND wa.status = 'active') AS wechat_linked
+     FROM users u WHERE u.id = ?`,
+    [userId]
+  )
   if (!user) {
     return {
       user: publicUser({

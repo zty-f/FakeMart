@@ -32,6 +32,7 @@ interface UserProfile {
   avatarUrl?: string | null
   defaultAddressLabel?: string | null
   lastActiveAt?: string | null
+  wechatLinked?: boolean
 }
 
 interface CouponStats {
@@ -95,15 +96,35 @@ export default function ProfilePage() {
     if (accountBusy) return
     setAccountBusy(true)
     try {
-      const result = await request<{ token: string; user: UserProfile }>('/auth/login', 'POST', { username: username.trim(), password })
+      const isWechatApp = Taro.getEnv() === Taro.ENV_TYPE.WEAPP
+      const endpoint = isWechatApp ? '/auth/link-wechat' : '/auth/login'
+      const result = await request<{ token: string; user: UserProfile }>(endpoint, 'POST', { username: username.trim(), password })
       setToken(result.token)
       setUser(result.user)
       setAddressDraft(syncDefaultAddress(result.user.defaultAddressLabel))
       setPassword('')
       await load()
-      Taro.showToast({ title: '登录成功', icon: 'success' })
+      Taro.showToast({ title: isWechatApp ? '微信已关联' : '登录成功', icon: 'success' })
     } catch (error) {
       Taro.showToast({ title: error instanceof Error ? error.message : '登录失败', icon: 'none' })
+    } finally {
+      setAccountBusy(false)
+    }
+  }
+
+  async function linkWechat() {
+    if (accountBusy) return
+    setAccountBusy(true)
+    try {
+      const result = await Taro.login()
+      const linked = await request<{ token: string; user: UserProfile }>('/auth/link-wechat', 'POST', { code: result.code })
+      setToken(linked.token)
+      setUser(linked.user)
+      setAddressDraft(syncDefaultAddress(linked.user.defaultAddressLabel))
+      await load()
+      Taro.showToast({ title: '微信已关联', icon: 'success' })
+    } catch (error) {
+      Taro.showToast({ title: error instanceof Error ? error.message : '微信关联失败', icon: 'none' })
     } finally {
       setAccountBusy(false)
     }
@@ -420,12 +441,17 @@ export default function ProfilePage() {
       <View className='section profileAccountPanel'>
         <View className='sectionHead'>
           <Text className='sectionTitle'>{isBound ? '账号状态' : '绑定账号'}</Text>
-          <Text className='muted'>{isBound ? '已绑定' : '用户名密码'}</Text>
+          <Text className='muted'>{isBound ? (user?.wechatLinked ? '微信已关联' : '微信未关联') : '用户名密码'}</Text>
         </View>
         {isBound ? (
           <View className='profileBoundCard'>
             <Text className='profileBoundName'>{user?.username}</Text>
             <Text className='profileBoundText'>订单、账本和收货地址已关联到这个账号。</Text>
+            {!user?.wechatLinked && Taro.getEnv() === Taro.ENV_TYPE.WEAPP && (
+              <View className={accountBusy ? 'primaryButton disabled' : 'primaryButton'} onClick={linkWechat}>
+                <Text>{accountBusy ? '关联中...' : '绑定微信登录'}</Text>
+              </View>
+            )}
           </View>
         ) : (
           <>
@@ -433,7 +459,7 @@ export default function ProfilePage() {
             <Input className='accountInput' value={password} password placeholder='输入密码，至少 6 位' onInput={(event) => setPassword(String(event.detail.value))} />
             <View className='profileAccountActions'>
               <View className={accountBusy ? 'secondaryButton disabled' : 'secondaryButton'} onClick={login}>
-                <Text>登录已有账号</Text>
+                <Text>{Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? '绑定已有账号' : '登录已有账号'}</Text>
               </View>
               <View className={accountBusy ? 'primaryButton disabled' : 'primaryButton'} onClick={register}>
                 <Text>{accountBusy ? '处理中...' : '绑定当前记录'}</Text>
